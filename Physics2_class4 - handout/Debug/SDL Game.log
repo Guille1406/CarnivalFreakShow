@@ -1,15 +1,16 @@
-﻿Build started 10/22/2016 3:10:28 PM.
-     1>Project "C:\Users\pinto\Desktop\fisica\Physics2_class4 - handout\SDL Game.vcxproj" on node 2 (Build target(s)).
+﻿Build started 10/22/2016 4:44:04 PM.
+     1>Project "C:\Users\pinto\Documents\GitHub\CarnivalFreakShow\Physics2_class4 - handout\SDL Game.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt ModuleSceneIntro.cpp
          ModuleSceneIntro.cpp
-     1>c:\users\pinto\desktop\fisica\physics2_class4 - handout\modulesceneintro.cpp(180): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-     1>c:\users\pinto\desktop\fisica\physics2_class4 - handout\modulesceneintro.cpp(182): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-     1>c:\users\pinto\desktop\fisica\physics2_class4 - handout\modulesceneintro.cpp(184): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-     1>c:\users\pinto\desktop\fisica\physics2_class4 - handout\modulesceneintro.cpp(187): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(73): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(183): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(185): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(187): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(190): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
      1>c:\program files (x86)\microsoft visual studio 14.0\vc\include\limits(214): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\pinto\Desktop\fisica\Physics2_class4 - handout\Debug\2D Physics - class 4.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\pinto\Desktop\fisica\Physics2_class4 - handout\Debug\2D Physics - class 4.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\pinto\Desktop\fisica\Physics2_class4 - handout\Debug\2D Physics - class 4.lib" /MACHINE:X86 Debug\Application.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\pinto\Documents\GitHub\CarnivalFreakShow\Physics2_class4 - handout\Debug\2D Physics - class 4.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\pinto\Documents\GitHub\CarnivalFreakShow\Physics2_class4 - handout\Debug\2D Physics - class 4.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\pinto\Documents\GitHub\CarnivalFreakShow\Physics2_class4 - handout\Debug\2D Physics - class 4.lib" /MACHINE:X86 Debug\Application.obj
          Debug\log.obj
          Debug\Main.obj
          Debug\ModuleAudio.obj
@@ -20,9 +21,9 @@
          Debug\ModuleSceneIntro.obj
          Debug\ModuleTextures.obj
          Debug\ModuleWindow.obj
-         SDL Game.vcxproj -> C:\Users\pinto\Desktop\fisica\Physics2_class4 - handout\Debug\2D Physics - class 4.exe
-     1>Done Building Project "C:\Users\pinto\Desktop\fisica\Physics2_class4 - handout\SDL Game.vcxproj" (Build target(s)).
+         SDL Game.vcxproj -> C:\Users\pinto\Documents\GitHub\CarnivalFreakShow\Physics2_class4 - handout\Debug\2D Physics - class 4.exe
+     1>Done Building Project "C:\Users\pinto\Documents\GitHub\CarnivalFreakShow\Physics2_class4 - handout\SDL Game.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:02.31
+Time Elapsed 00:00:02.01

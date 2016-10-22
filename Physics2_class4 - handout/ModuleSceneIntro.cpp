@@ -29,10 +29,10 @@ bool ModuleSceneIntro::Start()
 	Carnival_EX = App->textures->Load("pinball/walls.png");
 	box = App->textures->Load("pinball/bouncer.png");
 	rick = App->textures->Load("pinball/rick_head.png");
-	bonus_fx = App->audio->LoadFx("pinball/Vamos.wav");
+	bonus_fx = App->audio->LoadFx("pinball/ballhit.wav");
 	RacketLTex = App->textures->Load("pinball/Racket_left.png");
 	RacketRTex = App->textures->Load("pinball/Racket_right.png");
-
+	background = App->textures->Load("pinball/background.png");
 
 
 	Racket_left = App->physics->CreateRacket(230, 700, 20, 10);
@@ -70,7 +70,7 @@ update_status ModuleSceneIntro::Update()
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
 		b2BodyType Dyn = b2_dynamicBody;
-		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 9,Dyn  ,0.0f));
+		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 8.5f,Dyn  ,0.0f));
 		circles.getLast()->data->listener = this;
 	}
 	
@@ -132,6 +132,11 @@ update_status ModuleSceneIntro::Update()
 
 	fVector normal(0.0f, 0.0f);
 
+	
+	int x ,y;
+	Racket_left->GetPosition(x, y);
+	App->renderer->Blit(RacketLTex, x, y, NULL, 1.0f, Racket_left->GetRotation(),x-50);
+	App->renderer->Blit(background, 0, 0, NULL, 0);
 	// All draw functions ------------------------------------------------------
 	p2List_item<PhysBody*>*  c = Carnival.getFirst();
 
@@ -142,9 +147,7 @@ update_status ModuleSceneIntro::Update()
 	}
 
 
-	int x ,y;
-	Racket_left->GetPosition(x, y);
-	App->renderer->Blit(RacketLTex, x, y, NULL, 1.0f, Racket_left->GetRotation(),x-50);
+	
 	
 	c = circles.getFirst();
 	while(c != NULL)
@@ -295,104 +298,99 @@ bool ModuleSceneIntro::Createmap()
 		179, 199
 	};
 	*/
-	int Sticks[16] = {
-		285, 92,
-		285, 142,
-		290, 147,
-		295, 147,
-		298, 143,
-		299, 92,
-		295, 88,
-		289, 88
-	};
+		int Sticks[12] = {
+			130, 62,
+			130, 96,
+			135, 100,
+			140, 95,
+			140, 62,
+			135, 57
+		};
 
 	int RBand[14] = {
-		329, 641,
-		398, 595,
-		399, 553,
-		396, 548,
-		391, 551,
-		325, 634,
-		325, 640
+		217, 420,
+		260, 366,
+		263, 364,
+		265, 366,
+		265, 395,
+		221, 425,
+		217, 424
 	};
 
-	int LBand[14] = {
-		100, 547,
-		106, 550,
-		169, 629,
-		170, 635,
-		167, 639,
-		97, 594,
-		98, 551
+	int LBand[12] = {
+		64, 367,
+		63, 395,
+		108, 426,
+		114, 423,
+		70, 368,
+		67, 365
 	};
 	
-	int Rarm[14] = {
-		438, 619,
-		438, 559,
-		431, 558,
-		430, 609,
-		338, 671,
-		343, 689,
-		432, 621
+	int Rarm[16] = {
+		285, 408,
+		285, 376,
+		289, 371,
+		293, 376,
+		292, 411,
+		227, 462,
+		218, 451,
+		280, 411
 	};
-	int Larm[14] = {
-		56, 562,
-		56, 616,
-		153, 689,
-		163, 676,
-		66, 609,
-		66, 561,
-		60, 558
-	};
-
-	int Rcorner[24] = {
-		366, 182,
-		386, 115,
-		396, 103,
-		406, 98,
-		421, 98,
-		432, 103,
-		442, 114,
-		448, 127,
-		445, 143,
-		432, 158,
-		413, 167,
-		371, 184
+	int Larm [16] = {
+		45, 408,
+		45, 376,
+		41, 372,
+		37, 376,
+		37, 412,
+		101, 460,
+		110, 450,
+		45, 408
 	};
 
-	int Lcorner[26] = {
-		74, 173,
-		166, 136,
-		166, 67,
-		160, 61,
-		99, 61,
-		80, 68,
-		64, 77,
-		53, 91,
-		47, 108,
-		47, 125,
-		52, 146,
-		61, 159,
-		73, 172
+
+	int Rcorner[20] = {
+		6, 60,
+		47, 41,
+		54, 32,
+		56, 22,
+		51, 12,
+		41, 4,
+		27, 4,
+		17, 14,
+		0, 55,
+		2, 59
+	};
+
+	int Lcorner[22] = {
+		49, 118,
+		109, 91,
+		110, 46,
+		106, 41,
+		66, 41,
+		49, 45,
+		36, 56,
+		30, 72,
+		31, 89,
+		37, 104,
+		42, 110
 	};
 
 	b2BodyType StaticType = b2_staticBody;
 	int x = SCREEN_WIDTH / 2;
 	int y = SCREEN_HEIGHT;
 	Carnival.add(App->physics->CreateChain(0,0, Carnival_outside, 114, StaticType, 0.0f));
-	Carnival.add(App->physics->CreateCircle(175,225, 30,StaticType ,1.1f) );
-	
-	Carnival.add(App->physics->CreateCircle(253, 280, 30, StaticType,1.1f));
-	Carnival.add(App->physics->CreateCircle(328, 213, 30, StaticType, 1.1f));
-	Carnival.add(App->physics->CreateChain(0, 0, Sticks, 16, StaticType,0.0f));
-	Carnival.add(App->physics->CreateChain(-45, 0, Sticks, 16, StaticType,0.0));
-	Carnival.add(App->physics->CreateChain(-90, 0, Sticks, 16, StaticType,0.0f));
+	Carnival.add(App->physics->CreateCircle(115,148, 20,StaticType ,1.1f) );
+	Carnival.add(App->physics->CreateCircle(167, 185, 20, StaticType, 1.1f));
+	Carnival.add(App->physics->CreateCircle(218, 140, 20, StaticType, 1.1f));
+	Carnival.add(App->physics->CreateChain(0, 0, Sticks, 12, StaticType,0.0f));
+	Carnival.add(App->physics->CreateChain(30, 0, Sticks, 12, StaticType, 0.0f));
+	Carnival.add(App->physics->CreateChain(60, 0, Sticks, 12, StaticType, 0.0f));
 	Carnival.add(App->physics->CreateChain(0, 0, RBand,14, StaticType,1.8f));
-	Carnival.add(App->physics->CreateChain(0, 0, LBand,14 , StaticType,1.8f));
-	Carnival.add(App->physics->CreateChain(0, 0, Rarm, 14, StaticType,0.0f));
+	Carnival.add(App->physics->CreateChain(0, 0, LBand,12 , StaticType,1.8f));
+	Carnival.add(App->physics->CreateChain(0, 0, Rarm, 16, StaticType,0.0f));
 	Carnival.add(App->physics->CreateChain(0, 0, Larm, 14, StaticType,0.0f));
-	Carnival.add(App->physics->CreateChain(0, 0, Rcorner, 24, StaticType,0.0f));
-	Carnival.add(App->physics->CreateChain(0, 0, Lcorner, 26, StaticType,0.0f));
+	Carnival.add(App->physics->CreateChain(242, 63, Rcorner, 20, StaticType,0.0f));
+	Carnival.add(App->physics->CreateChain(0, 0, Lcorner, 22, StaticType,0.0f));
 
 
 	

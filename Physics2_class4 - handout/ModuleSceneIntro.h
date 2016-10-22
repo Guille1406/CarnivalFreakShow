@@ -32,7 +32,7 @@ public:
 	SDL_Texture* Carnival_EX;
 	SDL_Texture* box;
 	SDL_Texture* rick;
-
+	SDL_Texture* background;
 
 	SDL_Texture* RacketLTex;
 	SDL_Texture* RacketRTex;
