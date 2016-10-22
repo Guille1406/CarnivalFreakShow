@@ -33,7 +33,8 @@ public:
 	SDL_Texture* box;
 	SDL_Texture* rick;
 	SDL_Texture* background;
-
+	SDL_Texture* Screen;
+	SDL_Texture* grid;
 	SDL_Texture* RacketLTex;
 	SDL_Texture* RacketRTex;
 

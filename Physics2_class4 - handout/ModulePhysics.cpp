@@ -76,7 +76,7 @@ update_status ModulePhysics::PreUpdate()
 
 
 
-void ModulePhysics::CreateRevolutionJoint(PhysBody* bodya, PhysBody* bodyb) 
+void ModulePhysics::CreateRevolutionJoint(PhysBody* bodya, PhysBody* bodyb, PhysBody* bodyc, PhysBody* bodyd)
 
 {
 	b2RevoluteJointDef revoluteJointDef;
@@ -84,13 +84,26 @@ void ModulePhysics::CreateRevolutionJoint(PhysBody* bodya, PhysBody* bodyb)
 	revoluteJointDef.bodyB = bodyb->body;
 	revoluteJointDef.collideConnected = false;
 
-	revoluteJointDef.localAnchorA.Set(0.12f,0.16);
-	revoluteJointDef.localAnchorB.Set(0, 0);
-	revoluteJointDef.referenceAngle = 0.5;
+	revoluteJointDef.localAnchorA.Set(0.07f,0.16);
+	revoluteJointDef.localAnchorB.Set(-0.05f, 0);
+	revoluteJointDef.referenceAngle = 0;
 	revoluteJointDef.enableLimit = true;
-	revoluteJointDef.lowerAngle = -25 * DEGTORAD ;
-	revoluteJointDef.upperAngle  = 40 * DEGTORAD;
+	revoluteJointDef.lowerAngle = 10* DEGTORAD ;
+	revoluteJointDef.upperAngle  = 60 * DEGTORAD;
 	(b2RevoluteJoint*)world->CreateJoint(&revoluteJointDef);
+
+	b2RevoluteJointDef revoluteJointDefB;
+	revoluteJointDefB.bodyA = bodyc->body;
+	revoluteJointDefB.bodyB = bodyd->body;
+	revoluteJointDefB.collideConnected = false;
+
+	revoluteJointDefB.localAnchorA.Set(-0.07f,-0.16f);
+	revoluteJointDefB.localAnchorB.Set(0, 0);
+	revoluteJointDefB.referenceAngle = 0;
+	revoluteJointDefB.enableLimit = true;
+	revoluteJointDefB.lowerAngle = 10 * DEGTORAD;
+	revoluteJointDefB.upperAngle = 60* DEGTORAD;
+	(b2RevoluteJoint*)world->CreateJoint(&revoluteJointDefB);
 }
 
 
@@ -155,25 +168,40 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height)
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateRacket(int x, int y, int width, int height) 
+PhysBody* ModulePhysics::CreateRacket(int x, int y, int width, int height, bool side)
 {
 	b2BodyDef body;
 	body.type = b2_dynamicBody;
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 	
 	b2Vec2 vertices[8];
-	vertices[0].Set(0.067568f, 0.067568f);
-	vertices[1].Set(0.202703f, 0.022222f);
-	vertices[2].Set(1.345946f, 0.822222f);
-	vertices[3].Set(1.386486f, 0.933333f);
-	vertices[4].Set(1.332432f, 0.977778f);
-	vertices[5].Set(0.094595f, 0.422222f);
-	vertices[6].Set(0.013514f, 0.311111f);
-	vertices[7].Set(0.027027f, 0.155556f);
+	if (side) {
+		
+		vertices[0].Set(0.0625f,0.1000f);
+		vertices[1].Set(0.0208f,0.266f);
+		vertices[2].Set(0.16666f,0.466f);
+		vertices[3].Set(0.8958f,0.933f);
+		vertices[4].Set(0.979167f,0.9333f);
+		vertices[5].Set(0.937500f,0.8333f);
+		vertices[6].Set(0.270833f,0.10000f);
+		vertices[7].Set(00.1458f,0.06667f);
+		
+	}
+	else {
+
+		vertices[0].Set(0.9375f,0.3333f);
+		vertices[1].Set(0.10416f, 0.933f);
+		vertices[2].Set(0.020833f,0.9000f);
+		vertices[3].Set(0.1041f,0.7666f);
+		vertices[4].Set(0.7916f,0.066f);
+		vertices[5].Set(0.875f,0.066f);
+		vertices[6].Set(0.9375f,0.1333f);
+		vertices[7].Set(0.9583f,0.233f);
 
 
-	int count = 6;
 
+	}
+	int count = 8;
 	b2Body* b = world->CreateBody(&body);
 	b2PolygonShape racket;
 	racket.Set(vertices, count);
@@ -226,16 +254,12 @@ PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int heig
 
 
 
-PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, b2BodyType type, float Restitution)
+PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size)
 {
 	b2BodyDef body;
-	body.type = type;
-	
-	
+	body.type = b2_staticBody;
 		body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 	
-
-
 	b2Body* b = world->CreateBody(&body);
 
 	b2ChainShape shape;
@@ -251,7 +275,6 @@ PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, b2Body
 
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
-	fixture.restitution = Restitution;
 	b->CreateFixture(&fixture);
 
 	delete p;
