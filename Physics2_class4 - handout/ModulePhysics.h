@@ -43,12 +43,12 @@ public:
 	bool CleanUp();
 
 	PhysBody* CreateCircle(int x, int y, int radius,b2BodyType Type,float rest);
-	PhysBody* CreateRectangle(int x, int y, int width, int height);
+	PhysBody* CreateRectangle(int x, int y, int width, int height, bool dynamic);
 	PhysBody* CreateRacket(int x, int y, int width, int height, bool side);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
 
 	void CreateRevolutionJoint(PhysBody* a, PhysBody* b, PhysBody* bodyc, PhysBody* bodyd);
-	
+	void CreateDistanceJoint(PhysBody* bodya, PhysBody* bodyb);
 	PhysBody* CreateChain(int x, int y, int* points, int size, bool rest);
 	
 	// b2ContactListener ---

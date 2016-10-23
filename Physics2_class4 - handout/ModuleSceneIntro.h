@@ -44,7 +44,8 @@ public:
 	PhysBody* Racket_Right;
 	PhysBody* Pivot_Right;
 
-	
+	PhysBody* Spring;
+	PhysBody* Pivot_spring;
 	
 	uint kickerleft_fx;
 	uint Ballhit_fx;

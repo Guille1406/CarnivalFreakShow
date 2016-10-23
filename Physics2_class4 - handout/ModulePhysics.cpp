@@ -107,7 +107,24 @@ void ModulePhysics::CreateRevolutionJoint(PhysBody* bodya, PhysBody* bodyb, Phys
 }
 
 
+void ModulePhysics::CreateDistanceJoint(PhysBody* bodya, PhysBody* bodyb)
 
+{
+	b2PrismaticJointDef prismaticJointDef;
+	prismaticJointDef.bodyA = bodya->body;
+	prismaticJointDef.bodyB = bodyb->body;
+	prismaticJointDef.collideConnected = true;
+
+
+	prismaticJointDef.localAnchorA.Set(0, 0);
+	prismaticJointDef.localAnchorB.Set(0, -1);
+	prismaticJointDef.localAxisA.Set(0, -1);
+	prismaticJointDef.enableLimit = true;
+	prismaticJointDef.lowerTranslation = -0.02;
+	prismaticJointDef.upperTranslation = 1.0;
+	(b2PrismaticJoint*)world->CreateJoint(&prismaticJointDef);
+
+}
 
 
 
@@ -143,10 +160,15 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius,b2BodyType type ,
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height)
+PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, bool dynamic)
 {
 	b2BodyDef body;
-	body.type = b2_dynamicBody;
+	if (dynamic == true) {
+		body.type = b2_dynamicBody;
+	}
+	else {
+		body.type = b2_staticBody;
+	}
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 
 	b2Body* b = world->CreateBody(&body);

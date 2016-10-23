@@ -48,11 +48,15 @@ bool ModuleSceneIntro::Start()
 	//kickers
 	Racket_left = App->physics->CreateRacket(120, 460,1, 1, true);
 	Pivot_letf = App->physics->CreateCircle(115, 460, 8,b2_staticBody, 0.0f);
-	Racket_Right = App->physics->CreateRacket(215, 260, 1, 1, false);
-	Pivot_Right = App->physics->CreateCircle(215, 260, 8, b2_staticBody, 0.0f);
+	Racket_Right = App->physics->CreateRacket(215, 460, 1, 1, false);
+	Pivot_Right = App->physics->CreateCircle(215, 460, 8, b2_staticBody, 0.0f);
 
-     App->physics->CreateRevolutionJoint(Racket_left,Pivot_letf,Racket_Right,Pivot_Right );
+    App->physics->CreateRevolutionJoint(Racket_left,Pivot_letf,Racket_Right,Pivot_Right );
 
+	//Spring
+	Spring = App->physics->CreateRectangle(338, 450, 18, 10, true);
+	Pivot_spring = App->physics->CreateRectangle(338, 510, 18, 10, false);
+	App->physics->CreateDistanceJoint(Spring, Pivot_spring);
 	
 	
 	Createmap();
@@ -72,13 +76,20 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
-	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	if(App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 	{
 		ray_on = !ray_on;
 		ray.x = App->input->GetMouseX();
 		ray.y = App->input->GetMouseY();
 	}
-
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+	{
+		Spring->body->ApplyForceToCenter(b2Vec2(0.0f, 0.000000000000000000000000000000000000000001f), true);
+	}
+	else
+	{
+		Spring->body->ApplyForceToCenter(b2Vec2(0.0f, -200.0f), true);
+	}
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
 		Racket_left->body->ApplyForceToCenter(b2Vec2(0.0f, -80.0f), true);
@@ -105,7 +116,7 @@ update_status ModuleSceneIntro::Update()
 	
 	if(App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
-		boxes.add(App->physics->CreateRectangle(510, 690, 30,15));
+		boxes.add(App->physics->CreateRectangle(510, 690, 30,15, true));
 	}
 
 	// Prepare for raycast ------------------------------------------------------
