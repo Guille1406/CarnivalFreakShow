@@ -37,6 +37,8 @@ bool ModuleSceneIntro::Start()
 	grid = App->textures->Load("pinball/grid.png");
 	hitbandL_Tex = App->textures->Load("pinball/hitband.png");
 	hitbandR_Tex = App->textures->Load("pinball/hitbandR.png");
+	Bumper_Tex = App->textures->Load("pinball/button.png");
+
 	//
 	//AudioFx
 	kickerleft_fx = App->audio->LoadFx("pinball/SoundFx/kickerleft.wav");
@@ -220,23 +222,45 @@ update_status ModuleSceneIntro::Update()
 	}
 
 
-	if (hitbandL == true) {
-		timebandL = SDL_GetTicks();
+	if (hitbandL== true) {
+		timerHBL = SDL_GetTicks();
 		hitbandL = false;
 	}
-	if (SDL_GetTicks() <= (timebandL + 100)) {
+	if (SDL_GetTicks() <= (timerHBL + 100)) {
 		App->renderer->Blit(hitbandL_Tex, 50, 360, NULL, 1.0f, 0);
 	}
 
 	if (hitbandR == true) {
-		timebandR = SDL_GetTicks();
+		timerHBR = SDL_GetTicks();
 		hitbandR = false;
 	}
-	if (SDL_GetTicks() <= (timebandR + 100)) {
-		App->renderer->Blit(hitbandR_Tex, 205, 360, NULL, 1.0f, 0);
+	if (SDL_GetTicks() <= (timerHBR + 100)) {
+		App->renderer->Blit(hitbandR_Tex, 205, 362, NULL, 1.0f, 0);
+	}
+	if (bumper == true) {
+		timerB1 = SDL_GetTicks();
+		bumper = false;
+	}
+	if (SDL_GetTicks() <= (timerB1 + 100)) {
+		App->renderer->Blit(Bumper_Tex, 95, 125, NULL, 1.0f, 0);
+	}
+
+	if (bumper2 == true) {
+		timerB2 = SDL_GetTicks();
+		bumper2 = false;
+	}
+	if (SDL_GetTicks() <= (timerB2 + 100)) {
+		App->renderer->Blit(Bumper_Tex, 148,162, NULL, 1.0f, 0);
 	}
 
 
+	if (bumper3 == true) {
+		timerB3 = SDL_GetTicks();
+		bumper3 = false;
+	}
+	if (SDL_GetTicks() <= (timerB3 + 100)) {
+		App->renderer->Blit(Bumper_Tex, 200, 115, NULL, 1.0f, 0);
+	}
 
 	return UPDATE_CONTINUE;
 }
@@ -258,18 +282,30 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 	p2List_item<PhysBody*>* Sx =  Carnival.getFirst()->next;
 
-		if (bodyB == Sx->data || bodyB == Sx->next->data)
+		if (bodyB == Sx->data  )
 		{
 			App->audio->PlayFx(Bumpers1);
+			bumper = true;
 		}
-		Sx = Sx->next->next;
+
+		Sx = Sx->next;
+
+		if (bodyB == Sx->data)
+		{
+			App->audio->PlayFx(Bumpers1);
+			bumper2 = true;
+		}
+
+		Sx = Sx->next;
 
 		if (bodyB == Sx->data)
 		{
 			App->audio->PlayFx(Bumpers2);
+			bumper3 = true;
 		}
 		
 		Sx = Sx->next;
+
 		if (bodyB == Sx->data )
 		{
 			App->audio->PlayFx(bands_fx);
@@ -277,11 +313,13 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		}
 
 		Sx = Sx->next;
+
 		if (bodyB == Sx->data)
 		{
 			App->audio->PlayFx(bands_fx);
 			hitbandR = true;
 		}
+		
 		
 
 	}

@@ -29,10 +29,17 @@ public:
 	bool sensed;
 
 // hits
+
+	uint timerHBL;
+	uint timerHBR;
+	uint timerB1;
+	uint timerB2;
+	uint timerB3;
 	bool hitbandL;
-	uint timebandL;
 	bool hitbandR;
-	uint timebandR;
+	bool bumper;
+	bool bumper2;
+	bool bumper3;
 
 
 
@@ -50,6 +57,8 @@ public:
 	SDL_Texture* RacketRTex;
 	SDL_Texture* hitbandL_Tex;
 	SDL_Texture* hitbandR_Tex;
+	SDL_Texture* Bumper_Tex;
+
 
 	PhysBody* Racket_left;
 	PhysBody* Pivot_letf;
