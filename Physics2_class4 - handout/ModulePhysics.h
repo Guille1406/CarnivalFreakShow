@@ -49,7 +49,7 @@ public:
 
 	void CreateRevolutionJoint(PhysBody* a, PhysBody* b, PhysBody* bodyc, PhysBody* bodyd);
 	
-	PhysBody* CreateChain(int x, int y, int* points, int size);
+	PhysBody* CreateChain(int x, int y, int* points, int size, bool rest);
 	
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);

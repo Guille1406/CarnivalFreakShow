@@ -44,8 +44,17 @@ public:
 	PhysBody* Racket_Right;
 	PhysBody* Pivot_Right;
 
-
-	uint bonus_fx;
+	
+	
+	uint kickerleft_fx;
+	uint Ballhit_fx;
+	uint CarnivalMusic_fx;
+	uint bands_fx;
+	uint Bumpers1;
+	uint Bumpers2;
+	uint fatboy;
+	uint kickeright;
+	
 	p2Point<int> ray;
 	bool ray_on;
 };

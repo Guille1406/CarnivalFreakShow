@@ -25,18 +25,27 @@ bool ModuleSceneIntro::Start()
 
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
+	//textures
 	circle = App->textures->Load("pinball/wheel.png"); 
 	Carnival_EX = App->textures->Load("pinball/walls.png");
 	box = App->textures->Load("pinball/bouncer.png");
 	rick = App->textures->Load("pinball/rick_head.png");
-	bonus_fx = App->audio->LoadFx("pinball/ballhit.wav");
 	RacketLTex = App->textures->Load("pinball/kickerleft.png");
 	RacketRTex = App->textures->Load("pinball/Racket_right.png");
 	background = App->textures->Load("pinball/background.png");
 	Screen = App->textures->Load("pinball/Screen.png");
 	grid = App->textures->Load("pinball/grid.png");
-	
-	
+	//
+	//AudioFx
+	kickerleft_fx = App->audio->LoadFx("pinball/SoundFx/kickerleft.wav");
+	Ballhit_fx = App->audio->LoadFx("pinball/SoundFx/ballhit.wav");
+	CarnivalMusic_fx = App->audio->LoadFx("pinball/SoundFx/CircusSound.wav");
+	bands_fx = App->audio->LoadFx("pinball/SoundFx/Bands.wav");
+	Bumpers1 = App->audio->LoadFx("pinball/SoundFx/Bumpers.wav");
+	Bumpers2 = App->audio->LoadFx("pinball/SoundFx/Bumpers_2.wav");
+	App->audio->PlayFx(CarnivalMusic_fx);
+
+	//kickers
 	Racket_left = App->physics->CreateRacket(120, 460,1, 1, true);
 	Pivot_letf = App->physics->CreateCircle(115, 460, 8,b2_staticBody, 0.0f);
 	Racket_Right = App->physics->CreateRacket(215, 260, 1, 1, false);
@@ -192,8 +201,8 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	int x, y;
 
-	App->audio->PlayFx(bonus_fx);
-
+	App->audio->PlayFx(Ballhit_fx);
+	
 
 	if(bodyA)
 	{
@@ -201,13 +210,28 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
 	}
 
-	if(bodyB)
-	{
-		bodyB->GetPosition(x, y);
-		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
+	p2List_item<PhysBody*>* Sx =  Carnival.getFirst()->next;
+
+		if (bodyB == Sx->data || bodyB == Sx->next->data)
+		{
+			App->audio->PlayFx(Bumpers1);
+		}
+		Sx = Sx->next->next;
+
+		if (bodyB == Sx->data)
+		{
+			App->audio->PlayFx(Bumpers2);
+		}
+		
+		Sx = Sx->next;
+		if (bodyB == Sx->data || bodyB == Sx->next->data)
+		{
+			App->audio->PlayFx(bands_fx);
+		}
+
+
 	}
-	
-}
+
 
 bool ModuleSceneIntro::Createmap() 
 {
@@ -369,23 +393,44 @@ bool ModuleSceneIntro::Createmap()
 		37, 104,
 		42, 110
 	};
+	int BouncerBandL[10] = {
+		4, 0,
+		0, 4,
+		42, 55,
+		46, 52,
+		5, 1
 
-	b2BodyType StaticType = b2_staticBody;
+	};
+
+	int BouncerBandR[10] = {
+		149, 51,
+		153, 55,
+		194, 5,
+		190, 2,
+		151, 50
+
+	};
+
+
+
+
 	int x = SCREEN_WIDTH / 2;
 	int y = SCREEN_HEIGHT;
-	Carnival.add(App->physics->CreateChain(0,0, Carnival_outside, 114));
-	Carnival.add(App->physics->CreateCircle(115,148, 20,StaticType ,1.1f) );
-	Carnival.add(App->physics->CreateCircle(167, 185, 20, StaticType, 1.1f));
-	Carnival.add(App->physics->CreateCircle(218, 140, 20, StaticType, 1.1f));
-	Carnival.add(App->physics->CreateChain(0, 0, Sticks, 12));
-	Carnival.add(App->physics->CreateChain(30, 0, Sticks, 12));
-	Carnival.add(App->physics->CreateChain(60, 0, Sticks, 12));
-	Carnival.add(App->physics->CreateChain(0, 0, RBand,14));
-	Carnival.add(App->physics->CreateChain(0, 0, LBand,12));
-	Carnival.add(App->physics->CreateChain(0, 0, Rarm, 16));
-	Carnival.add(App->physics->CreateChain(0, 0, Larm, 14));
-	Carnival.add(App->physics->CreateChain(242, 63, Rcorner, 20));
-	Carnival.add(App->physics->CreateChain(0, 0, Lcorner, 22));
+	Carnival.add(App->physics->CreateChain(0,0, Carnival_outside, 114,false));
+	Carnival.add(App->physics->CreateCircle(115,148, 20, b2_staticBody,1.1f));
+	Carnival.add(App->physics->CreateCircle(167, 185, 20, b2_staticBody, 1.1f));
+	Carnival.add(App->physics->CreateCircle(218, 140, 20, b2_staticBody, 1.1f));
+	Carnival.add(App->physics->CreateChain(68,365, BouncerBandL,10,true));
+	Carnival.add(App->physics->CreateChain(66, 365, BouncerBandR, 10, true));
+	Carnival.add(App->physics->CreateChain(0, 0, Sticks, 12, false));
+	Carnival.add(App->physics->CreateChain(30, 0, Sticks, 12, false));
+	Carnival.add(App->physics->CreateChain(60, 0, Sticks, 12, false));
+	Carnival.add(App->physics->CreateChain(0, 0, RBand,14, false));
+	Carnival.add(App->physics->CreateChain(0, 0, LBand,12, false));
+	Carnival.add(App->physics->CreateChain(0, 0, Rarm, 16, false));
+	Carnival.add(App->physics->CreateChain(0, 0, Larm, 14, false));
+	Carnival.add(App->physics->CreateChain(242, 63, Rcorner, 20, false));
+	Carnival.add(App->physics->CreateChain(0, 0, Lcorner, 22, false));
 
 
 	
