@@ -84,12 +84,12 @@ void ModulePhysics::CreateRevolutionJoint(PhysBody* bodya, PhysBody* bodyb, Phys
 	revoluteJointDef.bodyB = bodyb->body;
 	revoluteJointDef.collideConnected = false;
 
-	revoluteJointDef.localAnchorA.Set(0.07f,0.16);
-	revoluteJointDef.localAnchorB.Set(-0.05f, 0);
+	revoluteJointDef.localAnchorA.Set(0.09f,0.16);
+	revoluteJointDef.localAnchorB.Set(-0.1f, 0.05f);
 	revoluteJointDef.referenceAngle = 0;
 	revoluteJointDef.enableLimit = true;
 	revoluteJointDef.lowerAngle = 20* DEGTORAD ;
-	revoluteJointDef.upperAngle  = 60 * DEGTORAD;
+	revoluteJointDef.upperAngle  = 80 * DEGTORAD;
 	(b2RevoluteJoint*)world->CreateJoint(&revoluteJointDef);
 
 	b2RevoluteJointDef revoluteJointDefB;
@@ -97,12 +97,12 @@ void ModulePhysics::CreateRevolutionJoint(PhysBody* bodya, PhysBody* bodyb, Phys
 	revoluteJointDefB.bodyB = bodyd->body;
 	revoluteJointDefB.collideConnected = false;
 
-	revoluteJointDefB.localAnchorA.Set(-0.07f,-0.16f);
-	revoluteJointDefB.localAnchorB.Set(0, 0);
+	revoluteJointDefB.localAnchorA.Set(0.9f,0.2f);
+	revoluteJointDefB.localAnchorB.Set(0.05f, 0);
 	revoluteJointDefB.referenceAngle = 0;
 	revoluteJointDefB.enableLimit = true;
-	revoluteJointDefB.lowerAngle = 10 * DEGTORAD;
-	revoluteJointDefB.upperAngle = 60* DEGTORAD;
+	revoluteJointDefB.lowerAngle = 20 * DEGTORAD;
+	revoluteJointDefB.upperAngle = 160* DEGTORAD;
 	(b2RevoluteJoint*)world->CreateJoint(&revoluteJointDefB);
 }
 

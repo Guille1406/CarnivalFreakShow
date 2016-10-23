@@ -46,12 +46,12 @@ bool ModuleSceneIntro::Start()
 	App->audio->PlayFx(CarnivalMusic_fx);
 
 	//kickers
-	Racket_left = App->physics->CreateRacket(120, 460,1, 1, true);
+	Racket_left = App->physics->CreateRacket(120, 460, 1, 1, true);
 	Pivot_letf = App->physics->CreateCircle(115, 460, 8,b2_staticBody, 0.0f);
-	Racket_Right = App->physics->CreateRacket(215, 460, 1, 1, false);
+	Racket_Right = App->physics->CreateRacket(145, 460, 1, 1, false);
 	Pivot_Right = App->physics->CreateCircle(215, 460, 8, b2_staticBody, 0.0f);
-
-    App->physics->CreateRevolutionJoint(Racket_left,Pivot_letf,Racket_Right,Pivot_Right );
+	App->physics->CreateRevolutionJoint(Racket_left, Pivot_letf, Racket_Right, Pivot_Right);
+ 
 
 	//Spring
 	Spring = App->physics->CreateRectangle(338, 450, 18, 10, true);
