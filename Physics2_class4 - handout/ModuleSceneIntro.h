@@ -28,6 +28,17 @@ public:
 	PhysBody* sensor;
 	bool sensed;
 
+// hits
+	bool hitbandL;
+	uint timebandL;
+	bool hitbandR;
+	uint timebandR;
+
+
+
+
+
+
 	SDL_Texture* circle;
 	SDL_Texture* Carnival_EX;
 	SDL_Texture* box;
@@ -37,6 +48,8 @@ public:
 	SDL_Texture* grid;
 	SDL_Texture* RacketLTex;
 	SDL_Texture* RacketRTex;
+	SDL_Texture* hitbandL_Tex;
+	SDL_Texture* hitbandR_Tex;
 
 	PhysBody* Racket_left;
 	PhysBody* Pivot_letf;

@@ -35,6 +35,8 @@ bool ModuleSceneIntro::Start()
 	background = App->textures->Load("pinball/background.png");
 	Screen = App->textures->Load("pinball/Screen.png");
 	grid = App->textures->Load("pinball/grid.png");
+	hitbandL_Tex = App->textures->Load("pinball/hitband.png");
+	hitbandR_Tex = App->textures->Load("pinball/hitbandR.png");
 	//
 	//AudioFx
 	kickerleft_fx = App->audio->LoadFx("pinball/SoundFx/kickerleft.wav");
@@ -76,6 +78,14 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
+	
+	
+
+
+
+
+
+
 	if(App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 	{
 		ray_on = !ray_on;
@@ -147,6 +157,7 @@ update_status ModuleSceneIntro::Update()
 		App->renderer->Blit(box, x, y, NULL, 1.0f);
 
 
+		
 
 
 	// All draw functions ------------------------------------------------------
@@ -208,6 +219,25 @@ update_status ModuleSceneIntro::Update()
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
 
+
+	if (hitbandL == true) {
+		timebandL = SDL_GetTicks();
+		hitbandL = false;
+	}
+	if (SDL_GetTicks() <= (timebandL + 100)) {
+		App->renderer->Blit(hitbandL_Tex, 50, 360, NULL, 1.0f, 0);
+	}
+
+	if (hitbandR == true) {
+		timebandR = SDL_GetTicks();
+		hitbandR = false;
+	}
+	if (SDL_GetTicks() <= (timebandR + 100)) {
+		App->renderer->Blit(hitbandR_Tex, 205, 360, NULL, 1.0f, 0);
+	}
+
+
+
 	return UPDATE_CONTINUE;
 }
 
@@ -240,11 +270,19 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		}
 		
 		Sx = Sx->next;
-		if (bodyB == Sx->data || bodyB == Sx->next->data)
+		if (bodyB == Sx->data )
 		{
 			App->audio->PlayFx(bands_fx);
+			hitbandL = true;
 		}
 
+		Sx = Sx->next;
+		if (bodyB == Sx->data)
+		{
+			App->audio->PlayFx(bands_fx);
+			hitbandR = true;
+		}
+		
 
 	}
 
