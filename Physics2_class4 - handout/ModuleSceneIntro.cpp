@@ -102,20 +102,20 @@ update_status ModuleSceneIntro::Update()
 	}
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
-		Racket_left->body->ApplyForceToCenter(b2Vec2(0.0f, -80.0f), true);
+		Racket_left->body->ApplyForceToCenter(b2Vec2(0.0f, -35.0f), true);
 	}
 	else
 	{
-		Racket_left->body->ApplyForceToCenter(b2Vec2(0.0f, 10.0f), true);
+		Racket_left->body->ApplyForceToCenter(b2Vec2(0.0f,10.0f), true);
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
-		Racket_Right->body->ApplyForceToCenter(b2Vec2(0.0f, -80.0f), true);
+		Racket_Right->body->ApplyForceToCenter(b2Vec2(0.0f, -35.0f), true);
 	}
 	else
 	{
-		Racket_Right->body->ApplyForceToCenter(b2Vec2(0.0f, 10.0f), true);
+		Racket_Right->body->ApplyForceToCenter(b2Vec2(0.0f, 0.0f), true);
 	}
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
@@ -151,7 +151,7 @@ update_status ModuleSceneIntro::Update()
 		App->renderer->Blit(RacketLTex, x+4, y-4, NULL, 1.0f, Racket_left->GetRotation()+50,0,2);
 
 		Racket_Right->GetPosition(x, y);
-		App->renderer->Blit(RacketRTex, x-6 , y , NULL, 1.0f, Racket_Right->GetRotation(),0,2);
+		App->renderer->Blit(RacketRTex, x-6 , y , NULL, 1.0f, Racket_Right->GetRotation(),10,-2);
 
 		Spring->GetPosition(x, y);
 		App->renderer->Blit(box, x, y, NULL, 1.0f);
