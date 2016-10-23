@@ -84,7 +84,7 @@ update_status ModuleSceneIntro::Update()
 	}
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
-		Spring->body->ApplyForceToCenter(b2Vec2(0.0f, 0.000000000000000000000000000000000000000001f), true);
+		Spring->body->ApplyForceToCenter(b2Vec2(0.0f, 0.01f), true);
 	}
 	else
 	{
