@@ -88,7 +88,7 @@ void ModulePhysics::CreateRevolutionJoint(PhysBody* bodya, PhysBody* bodyb, Phys
 	revoluteJointDef.localAnchorB.Set(-0.05f, 0);
 	revoluteJointDef.referenceAngle = 0;
 	revoluteJointDef.enableLimit = true;
-	revoluteJointDef.lowerAngle = 10* DEGTORAD ;
+	revoluteJointDef.lowerAngle = 20* DEGTORAD ;
 	revoluteJointDef.upperAngle  = 60 * DEGTORAD;
 	(b2RevoluteJoint*)world->CreateJoint(&revoluteJointDef);
 
@@ -180,9 +180,9 @@ PhysBody* ModulePhysics::CreateRacket(int x, int y, int width, int height, bool 
 		vertices[0].Set(0.0625f,0.1000f);
 		vertices[1].Set(0.0208f,0.266f);
 		vertices[2].Set(0.16666f,0.466f);
-		vertices[3].Set(0.8958f,0.933f);
-		vertices[4].Set(0.979167f,0.9333f);
-		vertices[5].Set(0.937500f,0.8333f);
+		vertices[3].Set(0.6958f,0.933f);
+		vertices[4].Set(0.779167f,0.9333f);
+		vertices[5].Set(0.737500f,0.8333f);
 		vertices[6].Set(0.270833f,0.10000f);
 		vertices[7].Set(00.1458f,0.06667f);
 		

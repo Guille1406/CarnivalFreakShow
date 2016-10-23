@@ -72,7 +72,7 @@ update_status ModuleSceneIntro::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
-		Racket_left->body->ApplyForceToCenter(b2Vec2(0.0f, -200.0f), true);
+		Racket_left->body->ApplyForceToCenter(b2Vec2(0.0f, -80.0f), true);
 	}
 	else
 	{
@@ -81,7 +81,7 @@ update_status ModuleSceneIntro::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
-		Racket_Right->body->ApplyForceToCenter(b2Vec2(0.0f, -200.0f), true);
+		Racket_Right->body->ApplyForceToCenter(b2Vec2(0.0f, -80.0f), true);
 	}
 	else
 	{
@@ -99,50 +99,6 @@ update_status ModuleSceneIntro::Update()
 		boxes.add(App->physics->CreateRectangle(510, 690, 30,15));
 	}
 
-	/*
-	if(App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
-	{
-		// Pivot 0, 0
-		int rick_head[64] = {
-			14, 36,
-			42, 40,
-			40, 0,
-			75, 30,
-			88, 4,
-			94, 39,
-			111, 36,
-			104, 58,
-			107, 62,
-			117, 67,
-			109, 73,
-			110, 85,
-			106, 91,
-			109, 99,
-			103, 104,
-			100, 115,
-			106, 121,
-			103, 125,
-			98, 126,
-			95, 137,
-			83, 147,
-			67, 147,
-			53, 140,
-			46, 132,
-			34, 136,
-			38, 126,
-			23, 123,
-			30, 114,
-			10, 102,
-			29, 90,
-			0, 75,
-			30, 62
-		};
-
-		b2BodyType Dyntype = b2_dynamicBody;
-		ricks.add(App->physics->CreateChain(App->input->GetMouseX(), App->input->GetMouseY(), rick_head, 64, Dyntype ,0.0f));
-	
-	}
-	*/
 	// Prepare for raycast ------------------------------------------------------
 	
 	iPoint mouse;
@@ -151,8 +107,6 @@ update_status ModuleSceneIntro::Update()
 	int ray_hit = ray.DistanceTo(mouse);
 
 	fVector normal(0.0f, 0.0f);
-	int x ,y;
-	Racket_left->GetPosition(x, y);
 	
 	//draw all background
 	
@@ -161,15 +115,20 @@ update_status ModuleSceneIntro::Update()
 		App->renderer->Blit(background, 0, 0, NULL, 0);
 		App->renderer->Blit(Screen, 365, 0, NULL, 0);
 		
-		App->renderer->Blit(RacketLTex, x, y, NULL, 1.0f, Racket_left->GetRotation()+30,0,2);
+		
+		int x ,y;
+		Racket_left->GetPosition(x, y);
+		App->renderer->Blit(RacketLTex, x+4, y-4, NULL, 1.0f, Racket_left->GetRotation()+50,0,2);
 
 
 
 
 
 	// All draw functions ------------------------------------------------------
-	p2List_item<PhysBody*>*  c = Carnival.getFirst();
+	
+		p2List_item<PhysBody*>*  c = Carnival.getFirst();
 
+		//Carnival's walls
 	while (c != NULL)
 	{
 		App->renderer->Blit(Carnival_EX, 0, 0, NULL, 1.0f,0);
@@ -177,7 +136,7 @@ update_status ModuleSceneIntro::Update()
 	}
 
 
-	
+	//circles
 	
 	c = circles.getFirst();
 	while(c != NULL)
@@ -189,6 +148,8 @@ update_status ModuleSceneIntro::Update()
 		c = c->next;
 	}
 
+
+	//boxes
 	c = boxes.getFirst();
 
 	while(c != NULL)
@@ -207,6 +168,8 @@ update_status ModuleSceneIntro::Update()
 
 	App->renderer->Blit(grid, 12, 68, NULL, 0);
 
+
+
 	// ray -----------------
 	if(ray_on == true)
 	{
@@ -222,6 +185,8 @@ update_status ModuleSceneIntro::Update()
 
 	return UPDATE_CONTINUE;
 }
+
+
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
