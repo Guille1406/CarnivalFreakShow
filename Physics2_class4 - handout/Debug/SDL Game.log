@@ -1,14 +1,15 @@
 ﻿  ModulePhysics.cpp
 c:\users\markuss\desktop\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(87): warning C4305: 'argumento': truncamiento de 'double' a 'float32'
 c:\users\markuss\desktop\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(123): warning C4305: '=': truncamiento de 'double' a 'float32'
-c:\users\markuss\desktop\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(187): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-c:\users\markuss\desktop\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(188): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-c:\users\markuss\desktop\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(240): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-c:\users\markuss\desktop\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(241): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-c:\users\markuss\desktop\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(291): warning C4018: '<': no coinciden signed/unsigned
-c:\users\markuss\desktop\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(494): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\markuss\desktop\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(495): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\markuss\desktop\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(501): warning C4244: 'return': conversión de 'float32' a 'int'; posible pérdida de datos
+c:\users\markuss\desktop\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(191): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\markuss\desktop\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(192): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\markuss\desktop\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(244): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\markuss\desktop\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(245): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\markuss\desktop\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(295): warning C4018: '<': no coinciden signed/unsigned
+c:\users\markuss\desktop\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(498): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\markuss\desktop\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(499): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\markuss\desktop\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(505): warning C4244: 'return': conversión de 'float32' a 'int'; posible pérdida de datos
 d:\archivos de programa (x86)\microsoft visual studio 14.0\vc\include\cmath(131): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+cl : Línea de comandos warning D9028: error de recompilación mínimo, revirtiendo a la compilación normal
   SDL Game.vcxproj -> C:\Users\Markuss\Desktop\CarnivalFreakShow\Physics2_class4 - handout\Debug\2D Physics - class 4.exe
   SDL Game.vcxproj -> C:\Users\Markuss\Desktop\CarnivalFreakShow\Physics2_class4 - handout\Debug\2D Physics - class 4.pdb (Full PDB)

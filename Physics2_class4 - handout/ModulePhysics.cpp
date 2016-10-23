@@ -101,13 +101,13 @@ void ModulePhysics::CreateRevolutionJoint(PhysBody* bodya, PhysBody* bodyb, Phys
 	revoluteJointDefB.localAnchorB.Set(0.05f, 0);
 	revoluteJointDefB.referenceAngle = 0;
 	revoluteJointDefB.enableLimit = true;
-	revoluteJointDefB.lowerAngle = 20 * DEGTORAD;
-	revoluteJointDefB.upperAngle = 160* DEGTORAD;
+	revoluteJointDefB.lowerAngle = -60 * DEGTORAD;
+	revoluteJointDefB.upperAngle = -10* DEGTORAD;
 	(b2RevoluteJoint*)world->CreateJoint(&revoluteJointDefB);
 }
 
 
-void ModulePhysics::CreateDistanceJoint(PhysBody* bodya, PhysBody* bodyb)
+void ModulePhysics::CreatePrismaticJoint(PhysBody* bodya, PhysBody* bodyb)
 
 {
 	b2PrismaticJointDef prismaticJointDef;
@@ -148,7 +148,10 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius,b2BodyType type ,
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
 	fixture.density = 1.0f;
-	fixture.restitution = Rest;
+	if (Rest != NULL) {
+		fixture.restitution = Rest;
+	}
+
 
 	b->CreateFixture(&fixture);
 
@@ -178,6 +181,7 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, bo
 	b2FixtureDef fixture;
 	fixture.shape = &box;
 	fixture.density = 1.0f;
+	fixture.restitution = 0.0;
 	b->CreateFixture(&fixture);
 
 	PhysBody* pbody = new PhysBody();

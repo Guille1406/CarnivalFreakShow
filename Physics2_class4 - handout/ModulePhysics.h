@@ -48,7 +48,7 @@ public:
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
 
 	void CreateRevolutionJoint(PhysBody* a, PhysBody* b, PhysBody* c, PhysBody* d);
-	void CreateDistanceJoint(PhysBody* bodya, PhysBody* bodyb);
+	void CreatePrismaticJoint(PhysBody* bodya, PhysBody* bodyb);
 	PhysBody* CreateChain(int x, int y, int* points, int size, bool rest);
 	
 	// b2ContactListener ---

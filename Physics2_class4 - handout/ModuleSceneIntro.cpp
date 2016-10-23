@@ -56,7 +56,7 @@ bool ModuleSceneIntro::Start()
 	//Spring
 	Spring = App->physics->CreateRectangle(338, 450, 18, 10, true);
 	Pivot_spring = App->physics->CreateRectangle(338, 510, 18, 10, false);
-	App->physics->CreateDistanceJoint(Spring, Pivot_spring);
+	App->physics->CreatePrismaticJoint(Spring, Pivot_spring);
 	
 	
 	Createmap();
@@ -88,7 +88,7 @@ update_status ModuleSceneIntro::Update()
 	}
 	else
 	{
-		Spring->body->ApplyForceToCenter(b2Vec2(0.0f, -200.0f), true);
+		Spring->body->ApplyForceToCenter(b2Vec2(0.0f, -30.0f), true);
 	}
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
@@ -96,7 +96,7 @@ update_status ModuleSceneIntro::Update()
 	}
 	else
 	{
-		Racket_left->body->ApplyForceToCenter(b2Vec2(0.0f, 100.0f), true);
+		Racket_left->body->ApplyForceToCenter(b2Vec2(0.0f, 0.0f), true);
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
@@ -105,12 +105,12 @@ update_status ModuleSceneIntro::Update()
 	}
 	else
 	{
-		Racket_Right->body->ApplyForceToCenter(b2Vec2(0.0f, 100.0f), true);
+		Racket_Right->body->ApplyForceToCenter(b2Vec2(0.0f, 0.0f), true);
 	}
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
 		b2BodyType Dyn = b2_dynamicBody;
-		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 8.5f,Dyn  ,0.0f));
+		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 7.5f,Dyn  ,NULL));
 		circles.getLast()->data->listener = this;
 	}
 	
