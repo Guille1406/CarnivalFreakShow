@@ -31,7 +31,7 @@ bool ModuleSceneIntro::Start()
 	box = App->textures->Load("pinball/bouncer.png");
 	rick = App->textures->Load("pinball/rick_head.png");
 	RacketLTex = App->textures->Load("pinball/kickerleft.png");
-	RacketRTex = App->textures->Load("pinball/Racket_right.png");
+	RacketRTex = App->textures->Load("pinball/kickerRight.png");
 	background = App->textures->Load("pinball/background.png");
 	Screen = App->textures->Load("pinball/Screen.png");
 	grid = App->textures->Load("pinball/grid.png");
@@ -82,7 +82,7 @@ update_status ModuleSceneIntro::Update()
 		ray.x = App->input->GetMouseX();
 		ray.y = App->input->GetMouseY();
 	}
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 	{
 		Spring->body->ApplyForceToCenter(b2Vec2(0.0f, 0.01f), true);
 	}
@@ -96,7 +96,7 @@ update_status ModuleSceneIntro::Update()
 	}
 	else
 	{
-		Racket_left->body->ApplyForceToCenter(b2Vec2(0.0f, 0.0f), true);
+		Racket_left->body->ApplyForceToCenter(b2Vec2(0.0f, 10.0f), true);
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
@@ -105,7 +105,7 @@ update_status ModuleSceneIntro::Update()
 	}
 	else
 	{
-		Racket_Right->body->ApplyForceToCenter(b2Vec2(0.0f, 0.0f), true);
+		Racket_Right->body->ApplyForceToCenter(b2Vec2(0.0f, 10.0f), true);
 	}
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
@@ -140,6 +140,11 @@ update_status ModuleSceneIntro::Update()
 		Racket_left->GetPosition(x, y);
 		App->renderer->Blit(RacketLTex, x+4, y-4, NULL, 1.0f, Racket_left->GetRotation()+50,0,2);
 
+		Racket_Right->GetPosition(x, y);
+		App->renderer->Blit(RacketRTex, x-6 , y , NULL, 1.0f, Racket_Right->GetRotation(),0,2);
+
+		Spring->GetPosition(x, y);
+		App->renderer->Blit(box, x, y, NULL, 1.0f);
 
 
 
@@ -430,7 +435,7 @@ bool ModuleSceneIntro::Createmap()
 	Carnival.add(App->physics->CreateChain(0,0, Carnival_outside, 114,false));
 	Carnival.add(App->physics->CreateCircle(115,148, 20, b2_staticBody,1.1f));
 	Carnival.add(App->physics->CreateCircle(167, 185, 20, b2_staticBody, 1.1f));
-	Carnival.add(App->physics->CreateCircle(218, 140, 20, b2_staticBody, 1.1f));
+	Carnival.add(App->physics->CreateCircle(218, 143, 20, b2_staticBody, 1.1f));
 	Carnival.add(App->physics->CreateChain(68,365, BouncerBandL,10,true));
 	Carnival.add(App->physics->CreateChain(66, 365, BouncerBandR, 10, true));
 	Carnival.add(App->physics->CreateChain(0, 0, Sticks, 12, false));
@@ -440,7 +445,7 @@ bool ModuleSceneIntro::Createmap()
 	Carnival.add(App->physics->CreateChain(0, 0, LBand,12, false));
 	Carnival.add(App->physics->CreateChain(0, 0, Rarm, 16, false));
 	Carnival.add(App->physics->CreateChain(0, 0, Larm, 14, false));
-	Carnival.add(App->physics->CreateChain(242, 63, Rcorner, 20, false));
+	Carnival.add(App->physics->CreateChain(242, 61, Rcorner, 20, false));
 	Carnival.add(App->physics->CreateChain(0, 0, Lcorner, 22, false));
 
 

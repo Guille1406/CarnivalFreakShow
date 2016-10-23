@@ -198,6 +198,7 @@ PhysBody* ModulePhysics::CreateRacket(int x, int y, int width, int height, bool 
 {
 	b2BodyDef body;
 	body.type = b2_dynamicBody;
+	body.bullet = true;
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 	
 	b2Vec2 vertices[8];
@@ -216,9 +217,9 @@ PhysBody* ModulePhysics::CreateRacket(int x, int y, int width, int height, bool 
 	else {
 
 		vertices[0].Set(0.9375f,0.3333f);
-		vertices[1].Set(0.10416f, 0.933f);
-		vertices[2].Set(0.020833f,0.9000f);
-		vertices[3].Set(0.1041f,0.7666f);
+		vertices[1].Set(0.26416f, 0.933f);
+		vertices[2].Set(0.160833f,0.9000f);
+		vertices[3].Set(0.2641f,0.7666f);
 		vertices[4].Set(0.7916f,0.066f);
 		vertices[5].Set(0.875f,0.066f);
 		vertices[6].Set(0.9375f,0.1333f);
