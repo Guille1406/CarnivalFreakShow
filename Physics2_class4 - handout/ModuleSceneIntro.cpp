@@ -38,7 +38,7 @@ bool ModuleSceneIntro::Start()
 	hitbandL_Tex = App->textures->Load("pinball/hitband.png");
 	hitbandR_Tex = App->textures->Load("pinball/hitbandR.png");
 	Bumper_Tex = App->textures->Load("pinball/button.png");
-
+	senstest = App->textures->Load("pinball/Letters/P.png");
 	//
 	//AudioFx
 	kickerleft_fx = App->audio->LoadFx("pinball/SoundFx/kickerleft.wav");
@@ -50,11 +50,13 @@ bool ModuleSceneIntro::Start()
 	App->audio->PlayFx(CarnivalMusic_fx);
 
 	//kickers
-	Racket_left = App->physics->CreateRacket(120, 460, 1, 1, true);
-	Pivot_letf = App->physics->CreateCircle(115, 460, 8,b2_staticBody, 0.0f);
+	Racket_left = App->physics->CreateRacket(120, 462, 1, 1, true);
+	Pivot_letf = App->physics->CreateCircle(115, 462, 8,b2_staticBody, 0.0f);
 	Racket_Right = App->physics->CreateRacket(145, 460, 1, 1, false);
 	Pivot_Right = App->physics->CreateCircle(215, 460, 8, b2_staticBody, 0.0f);
-	App->physics->CreateRevolutionJoint(Racket_left, Pivot_letf, Racket_Right, Pivot_Right);
+	Racket_Rightop = App->physics->CreateRacket(202, 285, 1, 1, false);
+	Pivot_Rightop = App->physics->CreateCircle(272, 285, 8, b2_staticBody, 0.0f);
+	App->physics->CreateRevolutionJoint(Racket_left, Pivot_letf, Racket_Right, Pivot_Right, Racket_Rightop, Pivot_Rightop);
  
 
 	//Spring
@@ -64,7 +66,7 @@ bool ModuleSceneIntro::Start()
 	
 	
 	Createmap();
-	//sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
+	sensor = App->physics->CreateRectangleSensor(120,75,18,15);
 
 	return ret;
 }
@@ -113,11 +115,13 @@ update_status ModuleSceneIntro::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
-		Racket_Right->body->ApplyForceToCenter(b2Vec2(0.0f, -35.0f), true);
+		Racket_Right->body->ApplyForceToCenter(b2Vec2(0.0f, -25.0f), true);
+		Racket_Rightop->body->ApplyForceToCenter(b2Vec2(0.0f, -25.0f), true);
 	}
 	else
 	{
-		Racket_Right->body->ApplyForceToCenter(b2Vec2(0.0f, 0.0f), true);
+		Racket_Right->body->ApplyForceToCenter(b2Vec2(0.0f, 10.0f), true);
+		Racket_Rightop->body->ApplyForceToCenter(b2Vec2(0.0f, 10.0f), true);
 	}
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
@@ -151,10 +155,10 @@ update_status ModuleSceneIntro::Update()
 		int x ,y;
 		Racket_left->GetPosition(x, y);
 		App->renderer->Blit(RacketLTex, x+4, y-4, NULL, 1.0f, Racket_left->GetRotation()+50,0,2);
-
 		Racket_Right->GetPosition(x, y);
-		App->renderer->Blit(RacketRTex, x-6 , y , NULL, 1.0f, Racket_Right->GetRotation(),10,-2);
-
+		App->renderer->Blit(RacketRTex, x-25 , y+33 , NULL, 1.0f, Racket_Right->GetRotation()-50,25,-38); //repassar
+		Racket_Rightop->GetPosition(x, y);
+		App->renderer->Blit(RacketRTex, x - 25, y + 33, NULL, 1.0f, Racket_Rightop->GetRotation() - 50, 25, -38); 
 		Spring->GetPosition(x, y);
 		App->renderer->Blit(box, x, y, NULL, 1.0f);
 
@@ -229,7 +233,13 @@ update_status ModuleSceneIntro::Update()
 	if (SDL_GetTicks() <= (timerHBL + 100)) {
 		App->renderer->Blit(hitbandL_Tex, 50, 360, NULL, 1.0f, 0);
 	}
-
+	if (sens == true) {
+		sens2 = SDL_GetTicks();
+		sens = false;
+	}
+	if (SDL_GetTicks() <= (sens2 + 1000)) {
+		App->renderer->Blit(senstest, 110, 40, NULL, 1.0f, 0);
+	}
 	if (hitbandR == true) {
 		timerHBR = SDL_GetTicks();
 		hitbandR = false;
@@ -318,6 +328,9 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		{
 			App->audio->PlayFx(bands_fx);
 			hitbandR = true;
+		}
+		if (bodyB == sensor) {
+			sens = true;
 		}
 		
 		

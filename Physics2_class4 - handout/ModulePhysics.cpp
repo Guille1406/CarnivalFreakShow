@@ -74,9 +74,9 @@ update_status ModulePhysics::PreUpdate()
 	return UPDATE_CONTINUE;
 }
 
+//http://www.box2d.org/forum/viewtopic.php?t=4334
 
-
-void ModulePhysics::CreateRevolutionJoint(PhysBody* bodya, PhysBody* bodyb, PhysBody* bodyc, PhysBody* bodyd)
+void ModulePhysics::CreateRevolutionJoint(PhysBody* bodya, PhysBody* bodyb, PhysBody* bodyc, PhysBody* bodyd, PhysBody* bodye, PhysBody* bodyf)
 
 {
 	b2RevoluteJointDef revoluteJointDef;
@@ -85,8 +85,7 @@ void ModulePhysics::CreateRevolutionJoint(PhysBody* bodya, PhysBody* bodyb, Phys
 	revoluteJointDef.collideConnected = false;
 
 	revoluteJointDef.localAnchorA.Set(0.09f,0.16);
-	revoluteJointDef.localAnchorB.Set(-0.1f, 0.05f);
-	revoluteJointDef.referenceAngle = 0;
+	revoluteJointDef.localAnchorB.Set(-0.05f, -0.00f);
 	revoluteJointDef.enableLimit = true;
 	revoluteJointDef.lowerAngle = 20* DEGTORAD ;
 	revoluteJointDef.upperAngle  = 80 * DEGTORAD;
@@ -98,12 +97,25 @@ void ModulePhysics::CreateRevolutionJoint(PhysBody* bodya, PhysBody* bodyb, Phys
 	revoluteJointDefB.collideConnected = false;
 
 	revoluteJointDefB.localAnchorA.Set(0.9f,0.2f);
-	revoluteJointDefB.localAnchorB.Set(0.05f, 0);
+	revoluteJointDefB.localAnchorB.Set(0.0f, 0.05f);
 	revoluteJointDefB.referenceAngle = 0;
 	revoluteJointDefB.enableLimit = true;
-	revoluteJointDefB.lowerAngle = -60 * DEGTORAD;
-	revoluteJointDefB.upperAngle = -10* DEGTORAD;
+	revoluteJointDefB.lowerAngle = -78 * DEGTORAD;
+	revoluteJointDefB.upperAngle = -15* DEGTORAD;
 	(b2RevoluteJoint*)world->CreateJoint(&revoluteJointDefB);
+
+	b2RevoluteJointDef revoluteJointDefC;
+	revoluteJointDefC.bodyA = bodye->body;
+	revoluteJointDefC.bodyB = bodyf->body;
+	revoluteJointDefC.collideConnected = false;
+
+	revoluteJointDefC.localAnchorA.Set(0.9f, 0.2f);
+	revoluteJointDefC.localAnchorB.Set(0.0f, 0.05f);
+	revoluteJointDefC.referenceAngle = 0;
+	revoluteJointDefC.enableLimit = true;
+	revoluteJointDefC.lowerAngle = -78 * DEGTORAD;
+	revoluteJointDefC.upperAngle = -15 * DEGTORAD;
+	(b2RevoluteJoint*)world->CreateJoint(&revoluteJointDefC);
 }
 
 
@@ -322,7 +334,7 @@ PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, bool r
 // 
 update_status ModulePhysics::PostUpdate()
 {
-	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN)
 		debug = !debug;
 
 	if (!debug)

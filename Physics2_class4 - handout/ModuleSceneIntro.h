@@ -40,8 +40,8 @@ public:
 	bool bumper;
 	bool bumper2;
 	bool bumper3;
-
-
+	uint sens2;
+	bool sens;
 
 
 
@@ -59,12 +59,16 @@ public:
 	SDL_Texture* hitbandR_Tex;
 	SDL_Texture* Bumper_Tex;
 
+	SDL_Texture* senstest;
 
 	PhysBody* Racket_left;
 	PhysBody* Pivot_letf;
 
 	PhysBody* Racket_Right;
 	PhysBody* Pivot_Right;
+
+	PhysBody* Racket_Rightop;
+	PhysBody* Pivot_Rightop;
 
 	PhysBody* Spring;
 	PhysBody* Pivot_spring;
