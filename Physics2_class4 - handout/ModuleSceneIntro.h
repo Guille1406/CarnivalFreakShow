@@ -32,7 +32,7 @@ public:
 	
 
 // hits
-
+	uint timecircle;
 	uint timerHBL;
 	uint timerHBR;
 	uint timerB1;
@@ -59,10 +59,10 @@ public:
 	SDL_Texture* grid;
 	SDL_Texture* RacketLTex;
 	SDL_Texture* RacketRTex;
-	SDL_Texture* hitbandL_Tex;
-	SDL_Texture* hitbandR_Tex;
 	SDL_Texture* Bumper_Tex;
 	
+	Animation hitbandR_Tex;
+	Animation hitbandL_Tex;
 	Animation Centercircle; 
 	Animation eyes;
 	Animation chewbacca;

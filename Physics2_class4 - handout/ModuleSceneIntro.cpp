@@ -98,7 +98,7 @@ update_status ModuleSceneIntro::Update()
 		Racket_Right->body->ApplyForceToCenter(b2Vec2(0.0f, 10.0f), true);
 		Racket_Rightop->body->ApplyForceToCenter(b2Vec2(0.0f, 10.0f), true);
 	}
-	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN )
 	{
 		b2BodyType Dyn = b2_dynamicBody;
 		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 7.5f,Dyn  ,NULL, BALL));
@@ -136,7 +136,9 @@ update_status ModuleSceneIntro::Update()
 		App->renderer->Blit(RacketRTex, x - 25, y + 33, NULL, 1.0f, Racket_Rightop->GetRotation() - 50, 25, -38); 
 		Spring->GetPosition(x, y);
 		App->renderer->Blit(box, x, y, NULL, 1.0f);
-
+		App->renderer->Blit(sprites, 108, 221, &(Centercircle.GetCurrentFrame()));
+		App->renderer->Blit(sprites, 539, 352, &(chewbacca.GetCurrentFrame()));
+		App->renderer->Blit(sprites, 409, 387, &(eyes.GetCurrentFrame()));
 
 		
 
@@ -199,14 +201,15 @@ update_status ModuleSceneIntro::Update()
 		if(normal.x != 0.0f)
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
+	
 
 
 	if (hitbandL== true) {
 		timerHBL = SDL_GetTicks();
 		hitbandL = false;
 	}
-	if (SDL_GetTicks() <= (timerHBL + 100)) {
-		App->renderer->Blit(hitbandL_Tex, 50, 360, NULL, 1.0f, 0);
+	if (SDL_GetTicks() <= (timerHBL +300)) {
+		App->renderer->Blit(sprites, 63, 364, &(hitbandL_Tex.GetCurrentFrame()));
 	}
 	if (twoHun1 == true) {
 	
@@ -228,8 +231,8 @@ update_status ModuleSceneIntro::Update()
 		timerHBR = SDL_GetTicks();
 		hitbandR = false;
 	}
-	if (SDL_GetTicks() <= (timerHBR + 100)) {
-		App->renderer->Blit(hitbandR_Tex, 205, 362, NULL, 1.0f, 0);
+	if (SDL_GetTicks() <= (timerHBR + 300)) {
+		App->renderer->Blit(sprites, 217, 364, &(hitbandR_Tex.GetCurrentFrame()));
 	}
 	if (bumper == true) {
 		timerB1 = SDL_GetTicks();
@@ -540,8 +543,8 @@ bool ModuleSceneIntro::Createmap()
 
 	};
 
-	int grind[32] = {
-		2, 146,
+	int grind[38] = {
+		3, 148,
 		5, 96,
 		12, 60,
 		22, 31,
@@ -552,11 +555,14 @@ bool ModuleSceneIntro::Createmap()
 		41, 44,
 		34, 70,
 		29, 101,
-		27, 148,
+		28, 180,
 		73, 1,
 		48, -13,
 		-3, 30,
-		-2, 145
+		-2, 145,
+		1, 193,
+		5, 191,
+		2, 151
 	};
 
 	int x = SCREEN_WIDTH / 2;
@@ -576,7 +582,7 @@ bool ModuleSceneIntro::Createmap()
 	Carnival.add(App->physics->CreateChain(0, 0, Larm, 14, false, WALLS));
 	Carnival.add(App->physics->CreateChain(242, 61, Rcorner, 20, false, WALLS));
 	Carnival.add(App->physics->CreateChain(0, 0, Lcorner, 22, false, WALLS));
-	Carnival.add(App->physics->CreateChain(15, 65, grind, 32, false, RAMP));
+	Carnival.add(App->physics->CreateChain(15, 65, grind, 38, false, RAMP));
 
 	
 
@@ -586,12 +592,51 @@ bool ModuleSceneIntro::Createmap()
 
 void ModuleSceneIntro::StartTextures() 
 {
-	sprites = App->textures->Load("bloodbros/backgroundall.png");
+	sprites = App->textures->Load("pinball/backgroundall.png");
 	Centercircle.PushBack({ 27,154,112,111 });
-	Centercircle.PushBack({ 151,154,112,111 });
-	Centercircle.PushBack({ 256,154,112,111 });
+	Centercircle.PushBack({ 144,156,112,111 });
+	Centercircle.PushBack({ 250,158,112,111 });
+	Centercircle.PushBack({ 359,154,114,111 });
+	Centercircle.PushBack({600,154,114,111 });
+	Centercircle.speed = 0.01f;
 	//
-
+	chewbacca.PushBack({0,0,118,148});
+	chewbacca.PushBack({129 ,0,118,148 });
+	chewbacca.PushBack({ 1000 ,0,118,148 });
+	chewbacca.speed = 0.005f;
+	//
+	hitbandL_Tex.PushBack({ 283,18,51,63 });
+	hitbandL_Tex.PushBack({ 338,18,51,63 });
+	hitbandL_Tex.PushBack({ 391,18,51,63 });
+	hitbandL_Tex.PushBack({ 443,18,51,63 });
+	hitbandL_Tex.PushBack({ 497,18,51,63 });
+	hitbandL_Tex.PushBack({ 551,18,51,63 });
+	hitbandL_Tex.speed = 0.16f;
+	//
+	hitbandR_Tex.PushBack({ 554,89,51,63 });
+	hitbandR_Tex.PushBack({ 498,89,51,63 });
+	hitbandR_Tex.PushBack({ 446,89,51,63 });
+	hitbandR_Tex.PushBack({ 394,89,51,63 });
+	hitbandR_Tex.PushBack({ 340,89,51,63 });
+	hitbandR_Tex.PushBack({ 285,89,51,63 });
+	hitbandR_Tex.speed = 0.16f;
+		//
+	eyes.PushBack({200,256,47,13});
+	eyes.PushBack({ 200,269,47,13 });
+	eyes.PushBack({ 200,282,47,13 });
+	eyes.PushBack({ 200,295,47,13 });
+	eyes.PushBack({ 200,308,47,13 });
+	eyes.PushBack({ 200,321,47,13 });
+	eyes.PushBack({ 200,334,47,13 });
+	eyes.PushBack({ 200,321,47,13 });
+	eyes.PushBack({ 200,308,47,13 });
+	eyes.PushBack({ 200,295,47,13 });
+	eyes.PushBack({ 200,282,47,13 });
+	eyes.PushBack({ 200,269,47,13 });
+	eyes.PushBack({ 200,256,47,13 });
+	eyes.speed = 0.03;
+	
+		//
 	circle = App->textures->Load("pinball/wheel.png");
 	Carnival_EX = App->textures->Load("pinball/walls.png");
 	box = App->textures->Load("pinball/bouncer.png");
@@ -601,8 +646,8 @@ void ModuleSceneIntro::StartTextures()
 	background = App->textures->Load("pinball/background.png");
 	Screen = App->textures->Load("pinball/Screen.png");
 	grid = App->textures->Load("pinball/grid.png");
-	hitbandL_Tex = App->textures->Load("pinball/hitband.png");
-	hitbandR_Tex = App->textures->Load("pinball/hitbandR.png");
+	
+	
 	Bumper_Tex = App->textures->Load("pinball/button.png");
 	twohundred_Tex = App->textures->Load("pinball/Letters/200Active.png");
 
