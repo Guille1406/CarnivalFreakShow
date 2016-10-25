@@ -28,8 +28,8 @@ public:
 	p2List<PhysBody*> ricks;
 	p2List<PhysBody*> Carnival;
 	
+	p2List<PhysBody*> twohunpoints;
 
-	PhysBody* sensor;
 	bool sensed;
 
 // hits
@@ -44,11 +44,12 @@ public:
 	bool bumper;
 	bool bumper2;
 	bool bumper3;
-	uint sens2;
-	bool sens;
+	bool twoHun1 = false;
+	bool twoHun2;
+	bool twoHun3;
+	bool twoHun4;
 
-
-	
+	SDL_Texture* twohundred_Tex;
 	SDL_Texture* sprites;
 	SDL_Texture* circle;
 	SDL_Texture* Carnival_EX;
@@ -65,7 +66,7 @@ public:
 	Animation Centercircle; 
 	Animation eyes;
 	Animation chewbacca;
-	SDL_Texture* senstest;
+
 
 	PhysBody* Racket_left;
 	PhysBody* Pivot_letf;

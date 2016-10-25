@@ -1,20 +1,31 @@
-﻿Build started 10/24/2016 10:11:11 PM.
+﻿Build started 10/25/2016 6:49:19 PM.
      1>Project "C:\Users\pinto\Documents\GitHub\CarnivalFreakShow\Physics2_class4 - handout\SDL Game.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Application.cpp ModuleSceneIntro.cpp
-         ModuleSceneIntro.cpp
-     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(100): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(189): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(191): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(193): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(196): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-     1>c:\program files (x86)\microsoft visual studio 14.0\vc\include\limits(214): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
-         Generating Code...
-         Compiling...
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Application.cpp ModulePhysics.cpp ModuleSceneIntro.cpp
+         ModulePhysics.cpp
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(87): warning C4305: 'argument': truncation from 'double' to 'float32'
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(135): warning C4305: '=': truncation from 'double' to 'float32'
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(207): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(208): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(263): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(264): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(313): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(519): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(520): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(526): warning C4244: 'return': conversion from 'float32' to 'int', possible loss of data
+     1>c:\program files (x86)\microsoft visual studio 14.0\vc\include\cmath(146): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
          Application.cpp
      1>c:\program files (x86)\microsoft visual studio 14.0\vc\include\limits(214): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
          Generating Code...
-     1>cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
+         Compiling...
+         ModuleSceneIntro.cpp
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(103): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(192): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(194): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(196): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(199): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+     1>c:\program files (x86)\microsoft visual studio 14.0\vc\include\limits(214): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
+         Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\pinto\Documents\GitHub\CarnivalFreakShow\Physics2_class4 - handout\Debug\2D Physics - class 4.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\pinto\Documents\GitHub\CarnivalFreakShow\Physics2_class4 - handout\Debug\2D Physics - class 4.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\pinto\Documents\GitHub\CarnivalFreakShow\Physics2_class4 - handout\Debug\2D Physics - class 4.lib" /MACHINE:X86 Debug\Application.obj
          Debug\log.obj
@@ -32,4 +43,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:05.21
+Time Elapsed 00:00:03.63

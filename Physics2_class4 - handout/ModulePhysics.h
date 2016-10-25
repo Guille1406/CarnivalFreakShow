@@ -13,6 +13,17 @@
 #define METERS_TO_PIXELS(m) ((int) floor(PIXELS_PER_METER * m))
 #define PIXEL_TO_METERS(p)  ((float) METER_PER_PIXEL * p)
 
+enum collision {
+	BALL = 1,
+	WALLS = 2,
+	RAMP = 4,
+	KICKER = 8,
+	NONE = 16,
+	BUMPER = 32
+	
+};
+
+
 // Small class to return to other modules to track position and rotation of physics bodies
 class PhysBody
 {
@@ -43,14 +54,14 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
-	PhysBody* CreateCircle(int x, int y, int radius,b2BodyType Type,float rest);
-	PhysBody* CreateRectangle(int x, int y, int width, int height, bool dynamic);
-	PhysBody* CreateRacket(int x, int y, int width, int height, bool side);
+	PhysBody* CreateCircle(int x, int y, int radius,b2BodyType Type,float rest, collision type);
+	PhysBody* CreateRectangle(int x, int y, int width, int height, bool dynamic, collision type);
+	PhysBody* CreateRacket(int x, int y, int width, int height, bool side, collision type);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
 
 	void CreateRevolutionJoint(PhysBody* a, PhysBody* b, PhysBody* c, PhysBody* d, PhysBody* bodye, PhysBody* bodyf);
 	void CreatePrismaticJoint(PhysBody* bodya, PhysBody* bodyb);
-	PhysBody* CreateChain(int x, int y, int* points, int size, bool rest);
+	PhysBody* CreateChain(int x, int y, int* points, int size, bool rest,collision typeC);
 	
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);

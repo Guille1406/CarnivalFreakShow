@@ -140,7 +140,7 @@ void ModulePhysics::CreatePrismaticJoint(PhysBody* bodya, PhysBody* bodyb)
 
 
 
-PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius,b2BodyType type , float Rest)
+PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius,b2BodyType type , float Rest, collision typeC)
 {
 	b2BodyDef body;
 	if(type == b2_dynamicBody)
@@ -160,6 +160,8 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius,b2BodyType type ,
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
 	fixture.density = 1.0f;
+	fixture.filter.categoryBits =typeC;
+	fixture.filter.maskBits = WALLS | KICKER  | BALL  ;
 	if (Rest != NULL) {
 		fixture.restitution = Rest;
 	}
@@ -175,7 +177,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius,b2BodyType type ,
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, bool dynamic)
+PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, bool dynamic, collision typeC)
 {
 	b2BodyDef body;
 	if (dynamic == true) {
@@ -194,6 +196,8 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, bo
 	fixture.shape = &box;
 	fixture.density = 1.0f;
 	fixture.restitution = 0.0;
+	fixture.filter.categoryBits = typeC;
+	fixture.filter.maskBits = BALL | WALLS;
 	b->CreateFixture(&fixture);
 
 	PhysBody* pbody = new PhysBody();
@@ -206,7 +210,7 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, bo
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateRacket(int x, int y, int width, int height, bool side)
+PhysBody* ModulePhysics::CreateRacket(int x, int y, int width, int height, bool side,collision typeC)
 {
 	b2BodyDef body;
 	body.type = b2_dynamicBody;
@@ -249,6 +253,8 @@ PhysBody* ModulePhysics::CreateRacket(int x, int y, int width, int height, bool 
 	fixture.shape = &racket;
 	fixture.density = 1.0f;
 	fixture.restitution = 0.2f;
+	fixture.filter.categoryBits = typeC;
+	fixture.filter.maskBits = BALL;
 	b->CreateFixture(&fixture);
 	PhysBody* pbody = new PhysBody();
 	pbody->body = b;
@@ -275,7 +281,6 @@ PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int heig
 	fixture.shape = &box;
 	fixture.density = 1.0f;
 	fixture.isSensor = true;
-
 	b->CreateFixture(&fixture);
 
 	PhysBody* pbody = new PhysBody();
@@ -293,7 +298,7 @@ PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int heig
 
 
 
-PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, bool rest)
+PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, bool rest, collision typeC)
 {
 	b2BodyDef body;
 	body.type = b2_staticBody;
@@ -317,6 +322,9 @@ PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, bool r
 	fixture.shape = &shape;
 	if(rest)
 	fixture.restitution = 1.5f;
+	fixture.filter.categoryBits = typeC;
+		fixture.filter.maskBits = BALL;
+		
 	b->CreateFixture(&fixture);
 
 	delete p;

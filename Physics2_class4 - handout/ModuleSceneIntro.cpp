@@ -37,8 +37,11 @@ bool ModuleSceneIntro::Start()
 	
 	//Map
 	Createmap();
-	sensor = App->physics->CreateRectangleSensor(120,75,18,15);
-
+	
+	twohunpoints.add(App->physics->CreateRectangleSensor(120,75,18,15));
+	twohunpoints.add(App->physics->CreateRectangleSensor(150, 75, 18, 15));
+	twohunpoints.add(App->physics->CreateRectangleSensor(180, 75, 18, 15));
+	twohunpoints.add(App->physics->CreateRectangleSensor(210, 75, 18, 15));
 	return ret;
 }
 
@@ -97,13 +100,13 @@ update_status ModuleSceneIntro::Update()
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
 		b2BodyType Dyn = b2_dynamicBody;
-		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 7.5f,Dyn  ,NULL));
+		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 7.5f,Dyn  ,NULL, BALL));
 		circles.getLast()->data->listener = this;
 	}
 	
 	if(App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
-		boxes.add(App->physics->CreateRectangle(510, 690, 30,15, true));
+		boxes.add(App->physics->CreateRectangle(510, 690, 30,15, true, WALLS));
 	}
 
 	// Prepare for raycast ------------------------------------------------------
@@ -204,12 +207,21 @@ update_status ModuleSceneIntro::Update()
 	if (SDL_GetTicks() <= (timerHBL + 100)) {
 		App->renderer->Blit(hitbandL_Tex, 50, 360, NULL, 1.0f, 0);
 	}
-	if (sens == true) {
-		sens2 = SDL_GetTicks();
-		sens = false;
+	if (twoHun1 == true) {
+	
+		App->renderer->Blit(twohundred_Tex, 110, 37, NULL, 1.0f, 0);
 	}
-	if (SDL_GetTicks() <= (sens2 + 1000)) {
-		App->renderer->Blit(senstest, 110, 40, NULL, 1.0f, 0);
+	if (twoHun2 == true) {
+
+		App->renderer->Blit(twohundred_Tex, 137, 37, NULL, 1.0f, 0);
+	}
+	if (twoHun3 == true) {
+
+		App->renderer->Blit(twohundred_Tex, 167, 37, NULL, 1.0f, 0);
+	}
+	if (twoHun4 == true) {
+
+		App->renderer->Blit(twohundred_Tex, 195, 37, NULL, 1.0f, 0);
 	}
 	if (hitbandR == true) {
 		timerHBR = SDL_GetTicks();
@@ -300,10 +312,46 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 			App->audio->PlayFx(bands_fx);
 			hitbandR = true;
 		}
-		if (bodyB == sensor) {
-			sens = true;
+		p2List_item<PhysBody*>* iterpoints = twohunpoints.getFirst();
+		if (bodyB == iterpoints->data) {
+			if (twoHun1 == false){
+				twoHun1 = true;
+			}
+			else
+			{
+				twoHun1 = false;
+			}
 		}
-		
+		iterpoints = iterpoints->next;
+		if (bodyB == iterpoints->data) {
+			if (twoHun2 == false) {
+				twoHun2 = true;
+			}
+			else
+			{
+				twoHun2 = false;
+			}
+		}
+		iterpoints = iterpoints->next;
+		if (bodyB == iterpoints->data) {
+			if (twoHun3 == false) {
+				twoHun3 = true;
+			}
+			else
+			{
+				twoHun3 = false;
+			}
+		}
+		iterpoints = iterpoints->next;
+		if (bodyB == iterpoints->data) {
+			if (twoHun4 == false) {
+				twoHun4 = true;
+			}
+			else
+			{
+				twoHun4 = false;
+			}
+		}
 		
 
 	}
@@ -487,27 +535,43 @@ bool ModuleSceneIntro::Createmap()
 
 	};
 
-
-
+	int grind[32] = {
+		2, 146,
+		5, 96,
+		12, 60,
+		22, 31,
+		41, 4,
+		54, -6,
+		68, 7,
+		54, 22,
+		41, 44,
+		34, 70,
+		29, 101,
+		27, 148,
+		73, 1,
+		48, -13,
+		-3, 30,
+		-2, 145
+	};
 
 	int x = SCREEN_WIDTH / 2;
 	int y = SCREEN_HEIGHT;
-	Carnival.add(App->physics->CreateChain(0,0, Carnival_outside, 114,false));
-	Carnival.add(App->physics->CreateCircle(115,148, 20, b2_staticBody,1.1f));
-	Carnival.add(App->physics->CreateCircle(167, 185, 20, b2_staticBody, 1.1f));
-	Carnival.add(App->physics->CreateCircle(218, 143, 20, b2_staticBody, 1.1f));
-	Carnival.add(App->physics->CreateChain(68,365, BouncerBandL,10,true));
-	Carnival.add(App->physics->CreateChain(66, 365, BouncerBandR, 10, true));
-	Carnival.add(App->physics->CreateChain(0, 0, Sticks, 12, false));
-	Carnival.add(App->physics->CreateChain(30, 0, Sticks, 12, false));
-	Carnival.add(App->physics->CreateChain(60, 0, Sticks, 12, false));
-	Carnival.add(App->physics->CreateChain(0, 0, RBand,14, false));
-	Carnival.add(App->physics->CreateChain(0, 0, LBand,12, false));
-	Carnival.add(App->physics->CreateChain(0, 0, Rarm, 16, false));
-	Carnival.add(App->physics->CreateChain(0, 0, Larm, 14, false));
-	Carnival.add(App->physics->CreateChain(242, 61, Rcorner, 20, false));
-	Carnival.add(App->physics->CreateChain(0, 0, Lcorner, 22, false));
-
+	Carnival.add(App->physics->CreateChain(0,0, Carnival_outside, 114,false, WALLS));
+	Carnival.add(App->physics->CreateCircle(115,148, 20, b2_staticBody,1.1f, WALLS));
+	Carnival.add(App->physics->CreateCircle(167, 185, 20, b2_staticBody, 1.1f, WALLS));
+	Carnival.add(App->physics->CreateCircle(218, 143, 20, b2_staticBody, 1.1f, WALLS));
+	Carnival.add(App->physics->CreateChain(68,365, BouncerBandL,10,true, WALLS));
+	Carnival.add(App->physics->CreateChain(66, 365, BouncerBandR, 10, true, WALLS));
+	Carnival.add(App->physics->CreateChain(0, 0, Sticks, 12, false, WALLS));
+	Carnival.add(App->physics->CreateChain(30, 0, Sticks, 12, false, WALLS));
+	Carnival.add(App->physics->CreateChain(60, 0, Sticks, 12, false, WALLS));
+	Carnival.add(App->physics->CreateChain(0, 0, RBand,14, false, WALLS));
+	Carnival.add(App->physics->CreateChain(0, 0, LBand,12, false, WALLS));
+	Carnival.add(App->physics->CreateChain(0, 0, Rarm, 16, false, WALLS));
+	Carnival.add(App->physics->CreateChain(0, 0, Larm, 14, false, WALLS));
+	Carnival.add(App->physics->CreateChain(242, 61, Rcorner, 20, false, WALLS));
+	Carnival.add(App->physics->CreateChain(0, 0, Lcorner, 22, false, WALLS));
+	Carnival.add(App->physics->CreateChain(15, 65, grind, 32, false, RAMP));
 
 	
 
@@ -535,7 +599,7 @@ void ModuleSceneIntro::StartTextures()
 	hitbandL_Tex = App->textures->Load("pinball/hitband.png");
 	hitbandR_Tex = App->textures->Load("pinball/hitbandR.png");
 	Bumper_Tex = App->textures->Load("pinball/button.png");
-	senstest = App->textures->Load("pinball/Letters/P.png");
+	twohundred_Tex = App->textures->Load("pinball/Letters/200Active.png");
 
 }
 void ModuleSceneIntro::StartAudioFx()
@@ -552,15 +616,15 @@ void ModuleSceneIntro::StartAudioFx()
 void ModuleSceneIntro::Startkickers() 
 {
 
-	Racket_left = App->physics->CreateRacket(120, 462, 1, 1, true);
-	Pivot_letf = App->physics->CreateCircle(115, 462, 8, b2_staticBody, 0.0f);
-	Racket_Right = App->physics->CreateRacket(145, 460, 1, 1, false);
-	Pivot_Right = App->physics->CreateCircle(215, 460, 8, b2_staticBody, 0.0f);
-	Racket_Rightop = App->physics->CreateRacket(202, 285, 1, 1, false);
-	Pivot_Rightop = App->physics->CreateCircle(272, 285, 8, b2_staticBody, 0.0f);
+	Racket_left = App->physics->CreateRacket(120, 462, 1, 1, true, KICKER);
+	Pivot_letf = App->physics->CreateCircle(115, 462, 8, b2_staticBody, 0.0f,NONE );
+	Racket_Right = App->physics->CreateRacket(145, 460, 1, 1, false, KICKER);
+	Pivot_Right = App->physics->CreateCircle(215, 460, 8, b2_staticBody, 0.0f, NONE);
+	Racket_Rightop = App->physics->CreateRacket(202, 285, 1, 1, false,KICKER);
+	Pivot_Rightop = App->physics->CreateCircle(272, 285, 8, b2_staticBody, 0.0f, NONE );
 	App->physics->CreateRevolutionJoint(Racket_left, Pivot_letf, Racket_Right, Pivot_Right, Racket_Rightop, Pivot_Rightop);
-	Spring = App->physics->CreateRectangle(338, 450, 18, 10, true);
-	Pivot_spring = App->physics->CreateRectangle(338, 510, 18, 10, false);
+	Spring = App->physics->CreateRectangle(338, 450, 18, 10, true,WALLS);
+	Pivot_spring = App->physics->CreateRectangle(338, 510, 18, 10, false, WALLS);
 	App->physics->CreatePrismaticJoint(Spring, Pivot_spring);
 
 }
