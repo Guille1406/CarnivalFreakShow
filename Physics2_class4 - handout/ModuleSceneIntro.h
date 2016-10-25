@@ -29,7 +29,6 @@ public:
 	p2List<PhysBody*> Carnival;
 	
 	p2List<PhysBody*> twohunpoints;
-
 	
 
 // hits

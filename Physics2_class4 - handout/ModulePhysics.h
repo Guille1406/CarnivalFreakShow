@@ -21,7 +21,7 @@ enum collision {
 	NONE = 16,
 	BUMPER = 32,
 	SENSOR = 64,
-	
+	RAIL_SENSOR = 128
 };
 
 
@@ -60,6 +60,7 @@ public:
 	PhysBody* CreateRacket(int x, int y, int width, int height, bool side, collision type);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height, collision typeC);
 
+	void RailDetect(PhysBody* bodyA, PhysBody* bodyB);
 	void CreateRevolutionJoint(PhysBody* a, PhysBody* b, PhysBody* c, PhysBody* d, PhysBody* bodye, PhysBody* bodyf);
 	void CreatePrismaticJoint(PhysBody* bodya, PhysBody* bodyb);
 	PhysBody* CreateChain(int x, int y, int* points, int size, bool rest,collision typeC);
@@ -68,7 +69,7 @@ public:
 	void BeginContact(b2Contact* contact);
 
 private:
-
+	bool rail;
 	bool debug;
 	b2World* world;
 	b2MouseJoint* mouse_joint;

@@ -42,6 +42,7 @@ bool ModuleSceneIntro::Start()
 	twohunpoints.add(App->physics->CreateRectangleSensor(150, 75, 18, 15, SENSOR));
 	twohunpoints.add(App->physics->CreateRectangleSensor(180, 75, 18, 15, SENSOR));
 	twohunpoints.add(App->physics->CreateRectangleSensor(210, 75, 18, 15, SENSOR));
+	twohunpoints.add(App->physics->CreateRectangleSensor(30, 220, 15, 5, RAIL_SENSOR));
 	return ret;
 }
 
@@ -265,7 +266,9 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	int x, y;
 
 	App->audio->PlayFx(Ballhit_fx);
-	
+
+	App->physics->RailDetect(bodyA, bodyB);
+
 
 	if(bodyA)
 	{

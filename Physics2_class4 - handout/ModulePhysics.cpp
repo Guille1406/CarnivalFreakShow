@@ -161,7 +161,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius,b2BodyType type ,
 	fixture.shape = &shape;
 	fixture.density = 1.0f;
 	fixture.filter.categoryBits =typeC;
-	fixture.filter.maskBits = WALLS | KICKER  | BALL | SENSOR ;
+	fixture.filter.maskBits = WALLS | KICKER  | BALL | SENSOR | RAIL_SENSOR ;
 	if (Rest != NULL) {
 		fixture.restitution = Rest;
 	}
@@ -543,4 +543,25 @@ void ModulePhysics::BeginContact(b2Contact* contact)
 
 	if(physB && physB->listener != NULL)
 		physB->listener->OnCollision(physB, physA);
+}
+
+void ModulePhysics::RailDetect(PhysBody* bodyA, PhysBody* bodyB)
+{
+
+	b2Filter filter = bodyA->body->GetFixtureList()->GetFilterData();// ball
+
+	if (bodyB->body->GetFixtureList()->GetFilterData().categoryBits == RAIL_SENSOR) {
+		if (rail == false) {
+			filter.maskBits= RAMP | KICKER | BALL | SENSOR | RAIL_SENSOR;
+			bodyA->body->GetFixtureList()->SetFilterData(filter);
+			rail = true;
+		}
+		else {
+			filter.maskBits = WALLS | KICKER | BALL | SENSOR | RAIL_SENSOR;
+			bodyA->body->GetFixtureList()->SetFilterData(filter);
+			rail = false;
+		}
+	}
+
+
 }
