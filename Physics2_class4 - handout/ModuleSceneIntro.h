@@ -30,7 +30,7 @@ public:
 	
 	p2List<PhysBody*> twohunpoints;
 
-	bool sensed;
+	
 
 // hits
 
@@ -44,7 +44,7 @@ public:
 	bool bumper;
 	bool bumper2;
 	bool bumper3;
-	bool twoHun1 = false;
+	bool twoHun1;
 	bool twoHun2;
 	bool twoHun3;
 	bool twoHun4;
@@ -63,10 +63,11 @@ public:
 	SDL_Texture* hitbandL_Tex;
 	SDL_Texture* hitbandR_Tex;
 	SDL_Texture* Bumper_Tex;
+	
 	Animation Centercircle; 
 	Animation eyes;
 	Animation chewbacca;
-
+	
 
 	PhysBody* Racket_left;
 	PhysBody* Pivot_letf;
@@ -80,6 +81,7 @@ public:
 	PhysBody* Spring;
 	PhysBody* Pivot_spring;
 	
+	//Audio_FX
 	uint kickerleft_fx;
 	uint Ballhit_fx;
 	uint CarnivalMusic_fx;

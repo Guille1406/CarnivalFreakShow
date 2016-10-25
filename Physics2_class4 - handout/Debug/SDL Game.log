@@ -1,7 +1,14 @@
-﻿Build started 10/25/2016 6:49:19 PM.
+﻿Build started 10/25/2016 7:23:23 PM.
      1>Project "C:\Users\pinto\Documents\GitHub\CarnivalFreakShow\Physics2_class4 - handout\SDL Game.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Application.cpp ModulePhysics.cpp ModuleSceneIntro.cpp
+         ModuleSceneIntro.cpp
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(103): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(192): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(194): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(196): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(199): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+     1>c:\program files (x86)\microsoft visual studio 14.0\vc\include\limits(214): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
          ModulePhysics.cpp
      1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(87): warning C4305: 'argument': truncation from 'double' to 'float32'
      1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(135): warning C4305: '=': truncation from 'double' to 'float32'
@@ -9,21 +16,12 @@
      1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(208): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
      1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(263): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
      1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(264): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(313): warning C4018: '<': signed/unsigned mismatch
-     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(519): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(520): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(526): warning C4244: 'return': conversion from 'float32' to 'int', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(315): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(521): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(522): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(528): warning C4244: 'return': conversion from 'float32' to 'int', possible loss of data
      1>c:\program files (x86)\microsoft visual studio 14.0\vc\include\cmath(146): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
          Application.cpp
-     1>c:\program files (x86)\microsoft visual studio 14.0\vc\include\limits(214): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
-         Generating Code...
-         Compiling...
-         ModuleSceneIntro.cpp
-     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(103): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(192): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(194): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(196): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(199): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
      1>c:\program files (x86)\microsoft visual studio 14.0\vc\include\limits(214): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
          Generating Code...
        Link:
@@ -43,4 +41,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:03.63
+Time Elapsed 00:00:03.95

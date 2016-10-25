@@ -19,7 +19,8 @@ enum collision {
 	RAMP = 4,
 	KICKER = 8,
 	NONE = 16,
-	BUMPER = 32
+	BUMPER = 32,
+	SENSOR = 64,
 	
 };
 
@@ -57,7 +58,7 @@ public:
 	PhysBody* CreateCircle(int x, int y, int radius,b2BodyType Type,float rest, collision type);
 	PhysBody* CreateRectangle(int x, int y, int width, int height, bool dynamic, collision type);
 	PhysBody* CreateRacket(int x, int y, int width, int height, bool side, collision type);
-	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
+	PhysBody* CreateRectangleSensor(int x, int y, int width, int height, collision typeC);
 
 	void CreateRevolutionJoint(PhysBody* a, PhysBody* b, PhysBody* c, PhysBody* d, PhysBody* bodye, PhysBody* bodyf);
 	void CreatePrismaticJoint(PhysBody* bodya, PhysBody* bodyb);

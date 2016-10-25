@@ -11,7 +11,7 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 {
 	circle = box = rick = NULL;
 	ray_on = false;
-	sensed = false;
+
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -38,10 +38,10 @@ bool ModuleSceneIntro::Start()
 	//Map
 	Createmap();
 	
-	twohunpoints.add(App->physics->CreateRectangleSensor(120,75,18,15));
-	twohunpoints.add(App->physics->CreateRectangleSensor(150, 75, 18, 15));
-	twohunpoints.add(App->physics->CreateRectangleSensor(180, 75, 18, 15));
-	twohunpoints.add(App->physics->CreateRectangleSensor(210, 75, 18, 15));
+	twohunpoints.add(App->physics->CreateRectangleSensor(120,75,18,15, SENSOR));
+	twohunpoints.add(App->physics->CreateRectangleSensor(150, 75, 18, 15, SENSOR));
+	twohunpoints.add(App->physics->CreateRectangleSensor(180, 75, 18, 15, SENSOR));
+	twohunpoints.add(App->physics->CreateRectangleSensor(210, 75, 18, 15, SENSOR));
 	return ret;
 }
 
@@ -312,6 +312,8 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 			App->audio->PlayFx(bands_fx);
 			hitbandR = true;
 		}
+
+
 		p2List_item<PhysBody*>* iterpoints = twohunpoints.getFirst();
 		if (bodyB == iterpoints->data) {
 			if (twoHun1 == false){

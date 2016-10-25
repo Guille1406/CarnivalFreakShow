@@ -161,7 +161,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius,b2BodyType type ,
 	fixture.shape = &shape;
 	fixture.density = 1.0f;
 	fixture.filter.categoryBits =typeC;
-	fixture.filter.maskBits = WALLS | KICKER  | BALL  ;
+	fixture.filter.maskBits = WALLS | KICKER  | BALL | SENSOR ;
 	if (Rest != NULL) {
 		fixture.restitution = Rest;
 	}
@@ -266,7 +266,7 @@ PhysBody* ModulePhysics::CreateRacket(int x, int y, int width, int height, bool 
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int height)
+PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int height, collision typeC)
 {
 	b2BodyDef body;
 	body.type = b2_staticBody;
@@ -281,6 +281,8 @@ PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int heig
 	fixture.shape = &box;
 	fixture.density = 1.0f;
 	fixture.isSensor = true;
+	fixture.filter.categoryBits = typeC;
+	fixture.filter.maskBits = BALL;
 	b->CreateFixture(&fixture);
 
 	PhysBody* pbody = new PhysBody();
