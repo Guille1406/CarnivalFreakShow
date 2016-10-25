@@ -82,6 +82,12 @@ update_status ModuleSceneIntro::Update()
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
 		Racket_left->body->ApplyForceToCenter(b2Vec2(0.0f, -35.0f), true);
+
+	}
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
+	{
+		Racket_left->body->ApplyForceToCenter(b2Vec2(0.0f, -35.0f), true);
+		App->audio->PlayFx(kickerleft_fx);
 	}
 	else
 	{
@@ -92,6 +98,12 @@ update_status ModuleSceneIntro::Update()
 	{
 		Racket_Right->body->ApplyForceToCenter(b2Vec2(0.0f, -25.0f), true);
 		Racket_Rightop->body->ApplyForceToCenter(b2Vec2(0.0f, -25.0f), true);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
+	{
+		Racket_Right->body->ApplyForceToCenter(b2Vec2(0.0f, -25.0f), true);
+		Racket_Rightop->body->ApplyForceToCenter(b2Vec2(0.0f, -25.0f), true);
+		App->audio->PlayFx(kickerleft_fx);
 	}
 	else
 	{
@@ -227,6 +239,21 @@ update_status ModuleSceneIntro::Update()
 
 		App->renderer->Blit(twohundred_Tex, 195, 37, NULL, 1.0f, 0);
 	}
+	if (twoHun1 == true && twoHun2 == true && twoHun3 == true && twoHun4 == true) {
+		fiveXbool = true;
+		timefiveX = SDL_GetTicks();
+		twoHun1 = twoHun2 = twoHun3 = twoHun4 = false;
+	}
+	if (fiveXbool == true && SDL_GetTicks() <= (timefiveX + 15000)) {
+
+		App->renderer->Blit(fivex_Tex, 150, 105, NULL, 1.0f, 0);
+		
+	}
+	if (fiveXbool == true && SDL_GetTicks() <= (timefiveX +2000)) {
+		App->renderer->Blit(sprites,150, 105, &(fiveX.GetCurrentFrame()));
+		App->audio->PlayFx(fiveX_fx);
+	}
+	
 	if (hitbandR == true) {
 		timerHBR = SDL_GetTicks();
 		hitbandR = false;
@@ -636,7 +663,11 @@ void ModuleSceneIntro::StartTextures()
 	eyes.PushBack({ 200,256,47,13 });
 	eyes.speed = 0.03;
 	
-		//
+	fiveX.PushBack({ 14,371,31,31 });
+	fiveX.PushBack({ 55,371,31,31 });
+	fiveX.speed = 0.2f;
+	//
+	fivex_Tex = App->textures->Load("pinball/5x.png");
 	circle = App->textures->Load("pinball/wheel.png");
 	Carnival_EX = App->textures->Load("pinball/walls.png");
 	box = App->textures->Load("pinball/bouncer.png");
@@ -654,6 +685,7 @@ void ModuleSceneIntro::StartTextures()
 }
 void ModuleSceneIntro::StartAudioFx()
 {
+	fiveX_fx = App->audio->LoadFx("pinball/SoundFx/soundX5.wav");
 	kickerleft_fx = App->audio->LoadFx("pinball/SoundFx/kickerleft.wav");
 	Ballhit_fx = App->audio->LoadFx("pinball/SoundFx/ballhit.wav");
 	CarnivalMusic_fx = App->audio->LoadFx("pinball/SoundFx/CircusSound.wav");

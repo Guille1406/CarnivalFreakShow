@@ -32,7 +32,7 @@ public:
 	
 
 // hits
-	uint timecircle;
+	uint timefiveX;
 	uint timerHBL;
 	uint timerHBR;
 	uint timerB1;
@@ -47,6 +47,7 @@ public:
 	bool twoHun2;
 	bool twoHun3;
 	bool twoHun4;
+	bool fiveXbool;
 
 	SDL_Texture* twohundred_Tex;
 	SDL_Texture* sprites;
@@ -60,13 +61,14 @@ public:
 	SDL_Texture* RacketLTex;
 	SDL_Texture* RacketRTex;
 	SDL_Texture* Bumper_Tex;
-	
+	SDL_Texture* fivex_Tex;
+	//
 	Animation hitbandR_Tex;
 	Animation hitbandL_Tex;
 	Animation Centercircle; 
 	Animation eyes;
 	Animation chewbacca;
-	
+	Animation fiveX;
 
 	PhysBody* Racket_left;
 	PhysBody* Pivot_letf;
@@ -81,6 +83,7 @@ public:
 	PhysBody* Pivot_spring;
 	
 	//Audio_FX
+	uint fiveX_fx;
 	uint kickerleft_fx;
 	uint Ballhit_fx;
 	uint CarnivalMusic_fx;
