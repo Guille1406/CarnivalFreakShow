@@ -26,45 +26,16 @@ bool ModuleSceneIntro::Start()
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
 	//textures
-	circle = App->textures->Load("pinball/wheel.png"); 
-	Carnival_EX = App->textures->Load("pinball/walls.png");
-	box = App->textures->Load("pinball/bouncer.png");
-	rick = App->textures->Load("pinball/rick_head.png");
-	RacketLTex = App->textures->Load("pinball/kickerleft.png");
-	RacketRTex = App->textures->Load("pinball/kickerRight.png");
-	background = App->textures->Load("pinball/background.png");
-	Screen = App->textures->Load("pinball/Screen.png");
-	grid = App->textures->Load("pinball/grid.png");
-	hitbandL_Tex = App->textures->Load("pinball/hitband.png");
-	hitbandR_Tex = App->textures->Load("pinball/hitbandR.png");
-	Bumper_Tex = App->textures->Load("pinball/button.png");
-	senstest = App->textures->Load("pinball/Letters/P.png");
+	StartTextures();
 	//
 	//AudioFx
-	kickerleft_fx = App->audio->LoadFx("pinball/SoundFx/kickerleft.wav");
-	Ballhit_fx = App->audio->LoadFx("pinball/SoundFx/ballhit.wav");
-	CarnivalMusic_fx = App->audio->LoadFx("pinball/SoundFx/CircusSound.wav");
-	bands_fx = App->audio->LoadFx("pinball/SoundFx/Bands.wav");
-	Bumpers1 = App->audio->LoadFx("pinball/SoundFx/Bumpers.wav");
-	Bumpers2 = App->audio->LoadFx("pinball/SoundFx/Bumpers_2.wav");
-	App->audio->PlayFx(CarnivalMusic_fx);
-
-	//kickers
-	Racket_left = App->physics->CreateRacket(120, 462, 1, 1, true);
-	Pivot_letf = App->physics->CreateCircle(115, 462, 8,b2_staticBody, 0.0f);
-	Racket_Right = App->physics->CreateRacket(145, 460, 1, 1, false);
-	Pivot_Right = App->physics->CreateCircle(215, 460, 8, b2_staticBody, 0.0f);
-	Racket_Rightop = App->physics->CreateRacket(202, 285, 1, 1, false);
-	Pivot_Rightop = App->physics->CreateCircle(272, 285, 8, b2_staticBody, 0.0f);
-	App->physics->CreateRevolutionJoint(Racket_left, Pivot_letf, Racket_Right, Pivot_Right, Racket_Rightop, Pivot_Rightop);
- 
-
-	//Spring
-	Spring = App->physics->CreateRectangle(338, 450, 18, 10, true);
-	Pivot_spring = App->physics->CreateRectangle(338, 510, 18, 10, false);
-	App->physics->CreatePrismaticJoint(Spring, Pivot_spring);
+	StartAudioFx();
 	
+
+	//kickers & Spring
+	Startkickers();
 	
+	//Map
 	Createmap();
 	sensor = App->physics->CreateRectangleSensor(120,75,18,15);
 
@@ -541,5 +512,55 @@ bool ModuleSceneIntro::Createmap()
 	
 
 	return true;
+
+}
+
+void ModuleSceneIntro::StartTextures() 
+{
+	sprites = App->textures->Load("bloodbros/backgroundall.png");
+	Centercircle.PushBack({ 27,154,112,111 });
+	Centercircle.PushBack({ 151,154,112,111 });
+	Centercircle.PushBack({ 256,154,112,111 });
+	//
+
+	circle = App->textures->Load("pinball/wheel.png");
+	Carnival_EX = App->textures->Load("pinball/walls.png");
+	box = App->textures->Load("pinball/bouncer.png");
+	rick = App->textures->Load("pinball/rick_head.png");
+	RacketLTex = App->textures->Load("pinball/kickerleft.png");
+	RacketRTex = App->textures->Load("pinball/kickerRight.png");
+	background = App->textures->Load("pinball/background.png");
+	Screen = App->textures->Load("pinball/Screen.png");
+	grid = App->textures->Load("pinball/grid.png");
+	hitbandL_Tex = App->textures->Load("pinball/hitband.png");
+	hitbandR_Tex = App->textures->Load("pinball/hitbandR.png");
+	Bumper_Tex = App->textures->Load("pinball/button.png");
+	senstest = App->textures->Load("pinball/Letters/P.png");
+
+}
+void ModuleSceneIntro::StartAudioFx()
+{
+	kickerleft_fx = App->audio->LoadFx("pinball/SoundFx/kickerleft.wav");
+	Ballhit_fx = App->audio->LoadFx("pinball/SoundFx/ballhit.wav");
+	CarnivalMusic_fx = App->audio->LoadFx("pinball/SoundFx/CircusSound.wav");
+	bands_fx = App->audio->LoadFx("pinball/SoundFx/Bands.wav");
+	Bumpers1 = App->audio->LoadFx("pinball/SoundFx/Bumpers.wav");
+	Bumpers2 = App->audio->LoadFx("pinball/SoundFx/Bumpers_2.wav");
+	App->audio->PlayFx(CarnivalMusic_fx);
+}
+
+void ModuleSceneIntro::Startkickers() 
+{
+
+	Racket_left = App->physics->CreateRacket(120, 462, 1, 1, true);
+	Pivot_letf = App->physics->CreateCircle(115, 462, 8, b2_staticBody, 0.0f);
+	Racket_Right = App->physics->CreateRacket(145, 460, 1, 1, false);
+	Pivot_Right = App->physics->CreateCircle(215, 460, 8, b2_staticBody, 0.0f);
+	Racket_Rightop = App->physics->CreateRacket(202, 285, 1, 1, false);
+	Pivot_Rightop = App->physics->CreateCircle(272, 285, 8, b2_staticBody, 0.0f);
+	App->physics->CreateRevolutionJoint(Racket_left, Pivot_letf, Racket_Right, Pivot_Right, Racket_Rightop, Pivot_Rightop);
+	Spring = App->physics->CreateRectangle(338, 450, 18, 10, true);
+	Pivot_spring = App->physics->CreateRectangle(338, 510, 18, 10, false);
+	App->physics->CreatePrismaticJoint(Spring, Pivot_spring);
 
 }

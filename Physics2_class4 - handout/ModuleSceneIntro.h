@@ -3,6 +3,7 @@
 #include "p2List.h"
 #include "p2Point.h"
 #include "Globals.h"
+#include "Animation.h"
 
 class PhysBody;
 
@@ -13,6 +14,9 @@ public:
 	~ModuleSceneIntro();
 
 	bool Start();
+	void StartTextures();
+	void StartAudioFx();
+	void Startkickers();
 	update_status Update();
 	bool CleanUp();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
@@ -44,8 +48,8 @@ public:
 	bool sens;
 
 
-
-
+	
+	SDL_Texture* sprites;
 	SDL_Texture* circle;
 	SDL_Texture* Carnival_EX;
 	SDL_Texture* box;
@@ -58,7 +62,9 @@ public:
 	SDL_Texture* hitbandL_Tex;
 	SDL_Texture* hitbandR_Tex;
 	SDL_Texture* Bumper_Tex;
-
+	Animation Centercircle; 
+	Animation eyes;
+	Animation chewbacca;
 	SDL_Texture* senstest;
 
 	PhysBody* Racket_left;
