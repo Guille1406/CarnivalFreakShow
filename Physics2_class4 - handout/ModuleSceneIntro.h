@@ -88,6 +88,8 @@ public:
 	uint multiplier = 1;
 	uint multi_timer;
 	bool spawner;
+	uint spawner_timer;
+	bool spawn;
 	//Audio_FX
 	uint fiveX_fx;
 	uint kickerleft_fx;

@@ -121,10 +121,15 @@ update_status ModuleSceneIntro::Update()
 
 	if(spawner==true)
 	{
-		b2BodyType Dyn = b2_dynamicBody;
-		circles.add(App->physics->CreateCircle(340,430, 7.5f,Dyn  ,NULL, BALL));
-		circles.getLast()->data->listener = this;
+		spawner_timer = SDL_GetTicks();
 		spawner = false;
+		spawn = true;
+	}
+	if (SDL_GetTicks() > spawner_timer + 1000 && spawn==true) {
+		b2BodyType Dyn = b2_dynamicBody;
+		circles.add(App->physics->CreateCircle(340, 430, 7.5f, Dyn, NULL, BALL));
+		circles.getLast()->data->listener = this;
+		spawn = false;
 	}
 
 	// Prepare for raycast ------------------------------------------------------
