@@ -33,27 +33,9 @@ bool ModulePhysics::Start()
 	world = new b2World(b2Vec2(GRAVITY_X, -GRAVITY_Y));
 	world->SetContactListener(this);
 
-	// needed to create joints like mouse joint
 	b2BodyDef bd;
 	ground = world->CreateBody(&bd);
-
-	// big static circle as "ground" in the middle of the screen
-	
-/*
-	b2BodyDef body;
-	body.type = b2_staticBody;
-	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
-
-	b2Body* big_ball = world->CreateBody(&body);
-
-	b2CircleShape shape;
-	shape.m_radius = PIXEL_TO_METERS(diameter) * 0.5f;
-
-	b2FixtureDef fixture;
-	fixture.shape = &shape;
-	big_ball->CreateFixture(&fixture);
-	*/
-	
+	debug = !debug;
 	return true;
 }
 
@@ -580,23 +562,23 @@ void ModulePhysics::RailDetect(PhysBody* bodyA, PhysBody* bodyB)
 		}
 	}
 	if (bodyB->body->GetFixtureList()->GetFilterData().categoryBits == SENSOR_S) {
-
 		App->scene_intro->hitS = true;
+		App->scene_intro->score += 150;
 	}
 	if (bodyB->body->GetFixtureList()->GetFilterData().categoryBits == SENSOR_U) {
-
 		App->scene_intro->hitU = true;
+		App->scene_intro->score += 150;
 	}
 	if (bodyB->body->GetFixtureList()->GetFilterData().categoryBits == SENSOR_P) {
-
+		App->scene_intro->score += 150;
 		App->scene_intro->hitP = true;
 	}
 	if (bodyB->body->GetFixtureList()->GetFilterData().categoryBits == SENSOR_E) {
-
+		App->scene_intro->score += 150;
 		App->scene_intro->hitE = true;
 	}
 	if (bodyB->body->GetFixtureList()->GetFilterData().categoryBits == SENSOR_R) {
-
+		App->scene_intro->score += 150;
 		App->scene_intro->hitR = true;
 	}
 }

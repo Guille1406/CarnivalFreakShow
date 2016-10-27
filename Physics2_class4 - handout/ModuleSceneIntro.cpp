@@ -351,6 +351,11 @@ c = circles.getFirst();
 		c = c->next;
 	}
 
+
+	//SCORE
+	p2SString title("Score:%d Live:%d Highscore:%d ", score, lives, highscore);
+	App->window->SetTitle(title.GetString());
+
 	return UPDATE_CONTINUE;
 }
 
@@ -461,10 +466,6 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				twoHun4 = false;
 			}
 		}
-		//SCORE
-
-		p2SString title("Score:%d Live:%d Highscore:%d  Multiplier%d", score, lives, highscore, multiplier);
-		App->window->SetTitle(title.GetString());
 	}
 
 
