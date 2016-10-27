@@ -28,7 +28,7 @@ public:
 	p2List<PhysBody*> ricks;
 	p2List<PhysBody*> Carnival;
 	
-	p2List<PhysBody*> twohunpoints;
+	p2List<PhysBody*> Sensors;
 	
 
 // hits
@@ -92,7 +92,7 @@ public:
 	uint Bumpers2;
 	uint fatboy;
 	uint kickeright;
-	
+	uint launcher;
 	p2Point<int> ray;
 	bool ray_on;
 };

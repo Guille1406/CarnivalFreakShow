@@ -38,11 +38,15 @@ bool ModuleSceneIntro::Start()
 	//Map
 	Createmap();
 	
-	twohunpoints.add(App->physics->CreateRectangleSensor(120,75,18,15, SENSOR));
-	twohunpoints.add(App->physics->CreateRectangleSensor(150, 75, 18, 15, SENSOR));
-	twohunpoints.add(App->physics->CreateRectangleSensor(180, 75, 18, 15, SENSOR));
-	twohunpoints.add(App->physics->CreateRectangleSensor(210, 75, 18, 15, SENSOR));
-	twohunpoints.add(App->physics->CreateRectangleSensor(30, 220, 15, 5, RAIL_SENSOR));
+	Sensors.add(App->physics->CreateRectangleSensor(120,75,18,15, SENSOR));
+	Sensors.add(App->physics->CreateRectangleSensor(150, 75, 18, 15, SENSOR));
+	Sensors.add(App->physics->CreateRectangleSensor(180, 75, 18, 15, SENSOR));
+	Sensors.add(App->physics->CreateRectangleSensor(210, 75, 18, 15, SENSOR));
+	Sensors.add(App->physics->CreateRectangleSensor(210, 75, 18, 15, SENSOR)); 
+	Sensors.add(App->physics->CreateRectangleSensor(30, 220, 20, 20, RAIL_SENSOR_UP));
+	Sensors.add(App->physics->CreateRectangleSensor(35, 250, 20, 20, RAIL_SENSOR_DOWN));
+	Sensors.add(App->physics->CreateRectangleSensor(160,500, 120, 20, BALLOUT));
+
 	return ret;
 }
 
@@ -79,6 +83,12 @@ update_status ModuleSceneIntro::Update()
 	{
 		Spring->body->ApplyForceToCenter(b2Vec2(0.0f, -30.0f), true);
 	}
+
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP || App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP)
+	{
+		App->audio->PlayFx(launcher);
+	}
+
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
 		Racket_left->body->ApplyForceToCenter(b2Vec2(0.0f, -35.0f), true);
@@ -113,13 +123,8 @@ update_status ModuleSceneIntro::Update()
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN )
 	{
 		b2BodyType Dyn = b2_dynamicBody;
-		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 7.5f,Dyn  ,NULL, BALL));
+		circles.add(App->physics->CreateCircle(340,430, 7.5f,Dyn  ,NULL, BALL));
 		circles.getLast()->data->listener = this;
-	}
-	
-	if(App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-	{
-		boxes.add(App->physics->CreateRectangle(510, 690, 30,15, true, WALLS));
 	}
 
 	// Prepare for raycast ------------------------------------------------------
@@ -249,6 +254,9 @@ update_status ModuleSceneIntro::Update()
 		App->renderer->Blit(fivex_Tex, 150, 105, NULL, 1.0f, 0);
 		
 	}
+
+
+
 	if (fiveXbool == true && SDL_GetTicks() <= (timefiveX +2000)) {
 		App->renderer->Blit(sprites,150, 105, &(fiveX.GetCurrentFrame()));
 		App->audio->PlayFx(fiveX_fx);
@@ -347,7 +355,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		}
 
 
-		p2List_item<PhysBody*>* iterpoints = twohunpoints.getFirst();
+		p2List_item<PhysBody*>* iterpoints = Sensors.getFirst();
 		if (bodyB == iterpoints->data) {
 			if (twoHun1 == false){
 				twoHun1 = true;
@@ -621,7 +629,7 @@ void ModuleSceneIntro::StartTextures()
 {
 	sprites = App->textures->Load("pinball/backgroundall.png");
 	Centercircle.PushBack({ 27,154,112,111 });
-	Centercircle.PushBack({ 144,156,112,111 });
+	Centercircle.PushBack({ 144,156,112,105 });
 	Centercircle.PushBack({ 250,158,112,111 });
 	Centercircle.PushBack({ 359,154,114,111 });
 	Centercircle.PushBack({600,154,114,111 });
@@ -692,6 +700,7 @@ void ModuleSceneIntro::StartAudioFx()
 	bands_fx = App->audio->LoadFx("pinball/SoundFx/Bands.wav");
 	Bumpers1 = App->audio->LoadFx("pinball/SoundFx/Bumpers.wav");
 	Bumpers2 = App->audio->LoadFx("pinball/SoundFx/Bumpers_2.wav");
+	launcher = App->audio->LoadFx("pinball/SoundFx/launcher.wav");
 	App->audio->PlayFx(CarnivalMusic_fx);
 }
 
@@ -702,8 +711,8 @@ void ModuleSceneIntro::Startkickers()
 	Pivot_letf = App->physics->CreateCircle(115, 462, 8, b2_staticBody, 0.0f,NONE );
 	Racket_Right = App->physics->CreateRacket(145, 460, 1, 1, false, KICKER);
 	Pivot_Right = App->physics->CreateCircle(215, 460, 8, b2_staticBody, 0.0f, NONE);
-	Racket_Rightop = App->physics->CreateRacket(202, 285, 1, 1, false,KICKER);
-	Pivot_Rightop = App->physics->CreateCircle(272, 285, 8, b2_staticBody, 0.0f, NONE );
+	Racket_Rightop = App->physics->CreateRacket(290, 245, 1, 1, false,KICKER);
+	Pivot_Rightop = App->physics->CreateCircle(310, 255, 8, b2_staticBody, 0.0f, NONE );
 	App->physics->CreateRevolutionJoint(Racket_left, Pivot_letf, Racket_Right, Pivot_Right, Racket_Rightop, Pivot_Rightop);
 	Spring = App->physics->CreateRectangle(338, 450, 18, 10, true,WALLS);
 	Pivot_spring = App->physics->CreateRectangle(338, 510, 18, 10, false, WALLS);

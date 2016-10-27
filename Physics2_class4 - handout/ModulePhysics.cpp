@@ -83,7 +83,7 @@ void ModulePhysics::CreateRevolutionJoint(PhysBody* bodya, PhysBody* bodyb, Phys
 	revoluteJointDef.bodyA = bodya->body;
 	revoluteJointDef.bodyB = bodyb->body;
 	revoluteJointDef.collideConnected = false;
-
+	revoluteJointDef.referenceAngle = 10 * DEGTORAD;
 	revoluteJointDef.localAnchorA.Set(0.09f,0.16);
 	revoluteJointDef.localAnchorB.Set(-0.05f, -0.00f);
 	revoluteJointDef.enableLimit = true;
@@ -98,7 +98,7 @@ void ModulePhysics::CreateRevolutionJoint(PhysBody* bodya, PhysBody* bodyb, Phys
 
 	revoluteJointDefB.localAnchorA.Set(0.9f,0.2f);
 	revoluteJointDefB.localAnchorB.Set(0.0f, 0.05f);
-	revoluteJointDefB.referenceAngle = 0;
+	revoluteJointDefB.referenceAngle = -10 * DEGTORAD;
 	revoluteJointDefB.enableLimit = true;
 	revoluteJointDefB.lowerAngle = -78 * DEGTORAD;
 	revoluteJointDefB.upperAngle = -15* DEGTORAD;
@@ -111,7 +111,7 @@ void ModulePhysics::CreateRevolutionJoint(PhysBody* bodya, PhysBody* bodyb, Phys
 
 	revoluteJointDefC.localAnchorA.Set(0.9f, 0.2f);
 	revoluteJointDefC.localAnchorB.Set(0.0f, 0.05f);
-	revoluteJointDefC.referenceAngle = 0;
+	revoluteJointDefC.referenceAngle = -15 * DEGTORAD;
 	revoluteJointDefC.enableLimit = true;
 	revoluteJointDefC.lowerAngle = -78 * DEGTORAD;
 	revoluteJointDefC.upperAngle = -15 * DEGTORAD;
@@ -161,7 +161,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius,b2BodyType type ,
 	fixture.shape = &shape;
 	fixture.density = 1.0f;
 	fixture.filter.categoryBits =typeC;
-	fixture.filter.maskBits = WALLS | KICKER  | BALL | SENSOR | RAIL_SENSOR ;
+	fixture.filter.maskBits = WALLS | KICKER  | BALL | SENSOR | RAIL_SENSOR_UP | LETTER_SENSOR ;
 	if (Rest != NULL) {
 		fixture.restitution = Rest;
 	}
@@ -223,9 +223,9 @@ PhysBody* ModulePhysics::CreateRacket(int x, int y, int width, int height, bool 
 		vertices[0].Set(0.0625f,0.1000f);
 		vertices[1].Set(0.0208f,0.266f);
 		vertices[2].Set(0.16666f,0.466f);
-		vertices[3].Set(0.6958f,0.933f);
-		vertices[4].Set(0.779167f,0.9333f);
-		vertices[5].Set(0.737500f,0.8333f);
+		vertices[3].Set(0.6958f,0.833f);
+		vertices[4].Set(0.57167f,0.8333f);
+		vertices[5].Set(0.57500f,0.8333f);
 		vertices[6].Set(0.270833f,0.10000f);
 		vertices[7].Set(00.1458f,0.06667f);
 		
@@ -233,8 +233,8 @@ PhysBody* ModulePhysics::CreateRacket(int x, int y, int width, int height, bool 
 	else {
 
 		vertices[0].Set(0.9375f,0.3333f);
-		vertices[1].Set(0.26416f, 0.933f);
-		vertices[2].Set(0.160833f,0.9000f);
+		vertices[1].Set(0.36416f, 0.933f);
+		vertices[2].Set(0.360833f,0.9000f);
 		vertices[3].Set(0.2641f,0.7666f);
 		vertices[4].Set(0.7916f,0.066f);
 		vertices[5].Set(0.875f,0.066f);
@@ -550,17 +550,16 @@ void ModulePhysics::RailDetect(PhysBody* bodyA, PhysBody* bodyB)
 
 	b2Filter filter = bodyA->body->GetFixtureList()->GetFilterData();// ball
 
-	if (bodyB->body->GetFixtureList()->GetFilterData().categoryBits == RAIL_SENSOR) {
-		if (rail == false) {
-			filter.maskBits= RAMP | KICKER | BALL | SENSOR | RAIL_SENSOR;
-			bodyA->body->GetFixtureList()->SetFilterData(filter);
-			rail = true;
-		}
-		else {
-			filter.maskBits = WALLS | KICKER | BALL | SENSOR | RAIL_SENSOR;
-			bodyA->body->GetFixtureList()->SetFilterData(filter);
-			rail = false;
-		}
+	if (bodyB->body->GetFixtureList()->GetFilterData().categoryBits == RAIL_SENSOR_UP) {
+
+		filter.maskBits = RAMP | RAIL_SENSOR_DOWN;
+		bodyA->body->GetFixtureList()->SetFilterData(filter);
+	}
+		
+	if (bodyB->body->GetFixtureList()->GetFilterData().categoryBits == RAIL_SENSOR_DOWN) {
+
+		filter.maskBits = WALLS | KICKER | BALL | SENSOR | RAIL_SENSOR_UP | LETTER_SENSOR;;
+		bodyA->body->GetFixtureList()->SetFilterData(filter);
 	}
 
 

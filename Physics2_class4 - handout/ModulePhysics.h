@@ -21,7 +21,10 @@ enum collision {
 	NONE = 16,
 	BUMPER = 32,
 	SENSOR = 64,
-	RAIL_SENSOR = 128
+	RAIL_SENSOR_UP = 128,
+	LETTER_SENSOR = 256,
+	RAIL_SENSOR_DOWN = 512,
+	BALLOUT = 1024
 };
 
 
@@ -69,7 +72,6 @@ public:
 	void BeginContact(b2Contact* contact);
 
 private:
-	bool rail;
 	bool debug;
 	b2World* world;
 	b2MouseJoint* mouse_joint;
