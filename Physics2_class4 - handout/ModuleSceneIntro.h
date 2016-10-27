@@ -81,7 +81,13 @@ public:
 
 	PhysBody* Spring;
 	PhysBody* Pivot_spring;
-	
+	//SCORE
+	uint score = 10;
+	uint lives=3;
+	uint highscore=3000;
+	uint multiplier = 1;
+	uint multi_timer;
+	bool spawner;
 	//Audio_FX
 	uint fiveX_fx;
 	uint kickerleft_fx;

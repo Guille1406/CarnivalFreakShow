@@ -3,6 +3,8 @@
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModulePhysics.h"
+#include "ModuleWindow.h"
+#include "ModuleSceneIntro.h"
 #include "p2Point.h"
 #include "math.h"
 
@@ -161,7 +163,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius,b2BodyType type ,
 	fixture.shape = &shape;
 	fixture.density = 1.0f;
 	fixture.filter.categoryBits =typeC;
-	fixture.filter.maskBits = WALLS | KICKER  | BALL | SENSOR | RAIL_SENSOR_UP | LETTER_SENSOR ;
+	fixture.filter.maskBits = WALLS | KICKER  | BALLOUT | SENSOR | RAIL_SENSOR_UP | LETTER_SENSOR | BALL;
 	if (Rest != NULL) {
 		fixture.restitution = Rest;
 	}
@@ -558,9 +560,22 @@ void ModulePhysics::RailDetect(PhysBody* bodyA, PhysBody* bodyB)
 		
 	if (bodyB->body->GetFixtureList()->GetFilterData().categoryBits == RAIL_SENSOR_DOWN) {
 
-		filter.maskBits = WALLS | KICKER | BALL | SENSOR | RAIL_SENSOR_UP | LETTER_SENSOR;;
+		filter.maskBits = WALLS | KICKER | BALLOUT | SENSOR | RAIL_SENSOR_UP | LETTER_SENSOR | BALL;
 		bodyA->body->GetFixtureList()->SetFilterData(filter);
 	}
-
+	if (bodyB->body->GetFixtureList()->GetFilterData().categoryBits == BALLOUT) {
+		if (App->scene_intro->lives > 0) {
+			App->scene_intro->lives--;
+			App->scene_intro->multiplier = 1;
+			App->scene_intro->spawner = true;
+		}
+		else {
+			App->window->SetTitle("//**GAME OVER**\\");
+			App->scene_intro->lives=3;
+			App->scene_intro->score = 0;
+			App->scene_intro->multiplier = 1;
+			App->scene_intro->spawner = true;
+		}
+	}
 
 }

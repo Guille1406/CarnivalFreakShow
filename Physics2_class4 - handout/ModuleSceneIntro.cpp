@@ -1,11 +1,13 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleRender.h"
+#include "ModuleWindow.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
+#include "p2SString.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -46,7 +48,7 @@ bool ModuleSceneIntro::Start()
 	Sensors.add(App->physics->CreateRectangleSensor(30, 220, 20, 20, RAIL_SENSOR_UP));
 	Sensors.add(App->physics->CreateRectangleSensor(35, 250, 20, 20, RAIL_SENSOR_DOWN));
 	Sensors.add(App->physics->CreateRectangleSensor(160,500, 120, 20, BALLOUT));
-
+	spawner = true;
 	return ret;
 }
 
@@ -63,10 +65,6 @@ update_status ModuleSceneIntro::Update()
 {
 	
 	
-
-
-
-
 
 
 	if(App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
@@ -120,11 +118,13 @@ update_status ModuleSceneIntro::Update()
 		Racket_Right->body->ApplyForceToCenter(b2Vec2(0.0f, 10.0f), true);
 		Racket_Rightop->body->ApplyForceToCenter(b2Vec2(0.0f, 10.0f), true);
 	}
-	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN )
+
+	if(spawner==true)
 	{
 		b2BodyType Dyn = b2_dynamicBody;
 		circles.add(App->physics->CreateCircle(340,430, 7.5f,Dyn  ,NULL, BALL));
 		circles.getLast()->data->listener = this;
+		spawner = false;
 	}
 
 	// Prepare for raycast ------------------------------------------------------
@@ -223,6 +223,7 @@ update_status ModuleSceneIntro::Update()
 
 	if (hitbandL== true) {
 		timerHBL = SDL_GetTicks();
+		score += 100* multiplier;
 		hitbandL = false;
 	}
 	if (SDL_GetTicks() <= (timerHBL +300)) {
@@ -252,19 +253,21 @@ update_status ModuleSceneIntro::Update()
 	if (fiveXbool == true && SDL_GetTicks() <= (timefiveX + 15000)) {
 
 		App->renderer->Blit(fivex_Tex, 150, 105, NULL, 1.0f, 0);
-		
 	}
-
-
-
+	if (SDL_GetTicks() > multi_timer + 8000) {
+		multiplier = 1;
+	}
 	if (fiveXbool == true && SDL_GetTicks() <= (timefiveX +2000)) {
 		App->renderer->Blit(sprites,150, 105, &(fiveX.GetCurrentFrame()));
 		App->audio->PlayFx(fiveX_fx);
+		multi_timer = SDL_GetTicks();
+		multiplier = 5;
 	}
 	
 	if (hitbandR == true) {
 		timerHBR = SDL_GetTicks();
 		hitbandR = false;
+		score += 100 * multiplier;
 	}
 	if (SDL_GetTicks() <= (timerHBR + 300)) {
 		App->renderer->Blit(sprites, 217, 364, &(hitbandR_Tex.GetCurrentFrame()));
@@ -293,6 +296,9 @@ update_status ModuleSceneIntro::Update()
 	if (SDL_GetTicks() <= (timerB3 + 100)) {
 		App->renderer->Blit(Bumper_Tex, 200, 115, NULL, 1.0f, 0);
 	}
+	if (score > highscore) {
+		highscore = score;
+	}
 
 	return UPDATE_CONTINUE;
 }
@@ -320,6 +326,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		{
 			App->audio->PlayFx(Bumpers1);
 			bumper = true;
+			score += 50 * multiplier;
 		}
 
 		Sx = Sx->next;
@@ -328,6 +335,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		{
 			App->audio->PlayFx(Bumpers1);
 			bumper2 = true;
+			score += 50 * multiplier;
 		}
 
 		Sx = Sx->next;
@@ -336,6 +344,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		{
 			App->audio->PlayFx(Bumpers2);
 			bumper3 = true;
+			score += 50 * multiplier;
 		}
 		
 		Sx = Sx->next;
@@ -344,6 +353,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		{
 			App->audio->PlayFx(bands_fx);
 			hitbandL = true;
+			score += 5 * multiplier;
 		}
 
 		Sx = Sx->next;
@@ -352,6 +362,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		{
 			App->audio->PlayFx(bands_fx);
 			hitbandR = true;
+			score += 5 * multiplier;
 		}
 
 
@@ -359,6 +370,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		if (bodyB == iterpoints->data) {
 			if (twoHun1 == false){
 				twoHun1 = true;
+				score += 200 * multiplier;
 			}
 			else
 			{
@@ -369,6 +381,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		if (bodyB == iterpoints->data) {
 			if (twoHun2 == false) {
 				twoHun2 = true;
+				score += 200 * multiplier;
 			}
 			else
 			{
@@ -379,6 +392,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		if (bodyB == iterpoints->data) {
 			if (twoHun3 == false) {
 				twoHun3 = true;
+				score += 200 * multiplier;
 			}
 			else
 			{
@@ -389,14 +403,17 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		if (bodyB == iterpoints->data) {
 			if (twoHun4 == false) {
 				twoHun4 = true;
+				score += 200 * multiplier;
 			}
 			else
 			{
 				twoHun4 = false;
 			}
 		}
-		
+		//SCORE
 
+		p2SString title("Score:%d Live:%d Highscore:%d  Multiplier%d", score, lives, highscore, multiplier);
+		App->window->SetTitle(title.GetString());
 	}
 
 
