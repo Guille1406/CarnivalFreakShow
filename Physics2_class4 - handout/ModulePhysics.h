@@ -24,7 +24,13 @@ enum collision {
 	RAIL_SENSOR_UP = 128,
 	LETTER_SENSOR = 256,
 	RAIL_SENSOR_DOWN = 512,
-	BALLOUT = 1024
+	BALLOUT = 1024,
+	SENSOR_S = 2048,
+	SENSOR_U = 4096,
+	SENSOR_P = 8192,
+	SENSOR_E = 16384,
+	SENSOR_R = 32768
+
 };
 
 
@@ -61,7 +67,7 @@ public:
 	PhysBody* CreateCircle(int x, int y, int radius,b2BodyType Type,float rest, collision type);
 	PhysBody* CreateRectangle(int x, int y, int width, int height, bool dynamic, collision type);
 	PhysBody* CreateRacket(int x, int y, int width, int height, bool side, collision type);
-	PhysBody* CreateRectangleSensor(int x, int y, int width, int height, collision typeC);
+	PhysBody* CreateRectangleSensor(int x, int y, int width, int height, collision typeC, int angle);
 
 	void RailDetect(PhysBody* bodyA, PhysBody* bodyB);
 	void CreateRevolutionJoint(PhysBody* a, PhysBody* b, PhysBody* c, PhysBody* d, PhysBody* bodye, PhysBody* bodyf);

@@ -1,10 +1,34 @@
-﻿  ModuleSceneIntro.cpp
-c:\users\markuss\desktop\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(130): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-c:\users\markuss\desktop\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(217): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\markuss\desktop\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(219): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\markuss\desktop\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(221): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-c:\users\markuss\desktop\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(224): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-c:\users\markuss\desktop\carnivalfreakshow\physics2_class4 - handout\modulesceneintro.cpp(694): warning C4305: '=': truncamiento de 'double' a 'float'
-d:\archivos de programa (x86)\microsoft visual studio 14.0\vc\include\limits(210): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
-  SDL Game.vcxproj -> C:\Users\Markuss\Desktop\CarnivalFreakShow\Physics2_class4 - handout\Debug\2D Physics - class 4.exe
-  SDL Game.vcxproj -> C:\Users\Markuss\Desktop\CarnivalFreakShow\Physics2_class4 - handout\Debug\2D Physics - class 4.pdb (Full PDB)
+﻿Build started 10/27/2016 11:42:03 PM.
+     1>Project "C:\Users\pinto\Documents\GitHub\CarnivalFreakShow\Physics2_class4 - handout\SDL Game.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt ModulePhysics.cpp
+         ModulePhysics.cpp
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(89): warning C4305: 'argument': truncation from 'double' to 'float32'
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(137): warning C4305: '=': truncation from 'double' to 'float32'
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(209): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(210): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(265): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(266): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(318): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(524): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(525): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pinto\documents\github\carnivalfreakshow\physics2_class4 - handout\modulephysics.cpp(531): warning C4244: 'return': conversion from 'float32' to 'int', possible loss of data
+     1>c:\program files (x86)\microsoft visual studio 14.0\vc\include\cmath(146): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\pinto\Documents\GitHub\CarnivalFreakShow\Physics2_class4 - handout\Debug\2D Physics - class 4.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\pinto\Documents\GitHub\CarnivalFreakShow\Physics2_class4 - handout\Debug\2D Physics - class 4.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\pinto\Documents\GitHub\CarnivalFreakShow\Physics2_class4 - handout\Debug\2D Physics - class 4.lib" /MACHINE:X86 Debug\Application.obj
+         Debug\log.obj
+         Debug\Main.obj
+         Debug\ModuleAudio.obj
+         Debug\ModuleInput.obj
+         Debug\ModulePhysics.obj
+         Debug\ModulePlayer.obj
+         Debug\ModuleRender.obj
+         Debug\ModuleSceneIntro.obj
+         Debug\ModuleTextures.obj
+         Debug\ModuleWindow.obj
+         SDL Game.vcxproj -> C:\Users\pinto\Documents\GitHub\CarnivalFreakShow\Physics2_class4 - handout\Debug\2D Physics - class 4.exe
+     1>Done Building Project "C:\Users\pinto\Documents\GitHub\CarnivalFreakShow\Physics2_class4 - handout\SDL Game.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:05.44

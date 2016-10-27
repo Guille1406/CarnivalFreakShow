@@ -40,14 +40,19 @@ bool ModuleSceneIntro::Start()
 	//Map
 	Createmap();
 	
-	Sensors.add(App->physics->CreateRectangleSensor(120,75,18,15, SENSOR));
-	Sensors.add(App->physics->CreateRectangleSensor(150, 75, 18, 15, SENSOR));
-	Sensors.add(App->physics->CreateRectangleSensor(180, 75, 18, 15, SENSOR));
-	Sensors.add(App->physics->CreateRectangleSensor(210, 75, 18, 15, SENSOR));
-	Sensors.add(App->physics->CreateRectangleSensor(210, 75, 18, 15, SENSOR)); 
-	Sensors.add(App->physics->CreateRectangleSensor(30, 220, 20, 20, RAIL_SENSOR_UP));
-	Sensors.add(App->physics->CreateRectangleSensor(35, 250, 20, 20, RAIL_SENSOR_DOWN));
-	Sensors.add(App->physics->CreateRectangleSensor(160,500, 120, 20, BALLOUT));
+	Sensors.add(App->physics->CreateRectangleSensor(120,75,18,15, SENSOR, NULL));
+	Sensors.add(App->physics->CreateRectangleSensor(150, 75, 18, 15, SENSOR, NULL));
+	Sensors.add(App->physics->CreateRectangleSensor(180, 75, 18, 15, SENSOR, NULL));
+	Sensors.add(App->physics->CreateRectangleSensor(210, 75, 18, 15, SENSOR, NULL));
+	Sensors.add(App->physics->CreateRectangleSensor(210, 75, 18, 15, SENSOR, NULL));
+	Sensors.add(App->physics->CreateRectangleSensor(30, 220, 20, 20, RAIL_SENSOR_UP, NULL));
+	Sensors.add(App->physics->CreateRectangleSensor(35, 250, 20, 20, RAIL_SENSOR_DOWN, NULL));
+	Sensors.add(App->physics->CreateRectangleSensor(160,500, 120, 20, BALLOUT, NULL));
+	Sensors.add(App->physics->CreateRectangleSensor(22, 308, 18, 5, SENSOR_S, -45));
+	Sensors.add(App->physics->CreateRectangleSensor(304, 308, 18, 5, SENSOR_E, 45));
+	Sensors.add(App->physics->CreateRectangleSensor(282, 292, 18, 5, SENSOR_R, 45));
+	Sensors.add(App->physics->CreateRectangleSensor(60, 118, 18, 5, SENSOR_U, -20));
+	Sensors.add(App->physics->CreateRectangleSensor(90, 108, 18, 5, SENSOR_P, -20));
 	spawner = true;
 	return ret;
 }
@@ -89,12 +94,11 @@ update_status ModuleSceneIntro::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
-		Racket_left->body->ApplyForceToCenter(b2Vec2(0.0f, -35.0f), true);
+		Racket_left->body->ApplyForceToCenter(b2Vec2(0.0f, -55.0f), true);
 
 	}
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
 	{
-		Racket_left->body->ApplyForceToCenter(b2Vec2(0.0f, -35.0f), true);
 		App->audio->PlayFx(kickerleft_fx);
 	}
 	else
@@ -104,13 +108,13 @@ update_status ModuleSceneIntro::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
-		Racket_Right->body->ApplyForceToCenter(b2Vec2(0.0f, -25.0f), true);
-		Racket_Rightop->body->ApplyForceToCenter(b2Vec2(0.0f, -25.0f), true);
+		Racket_Right->body->ApplyForceToCenter(b2Vec2(0.0f, -55.0f), true);
+		Racket_Rightop->body->ApplyForceToCenter(b2Vec2(0.0f, -55.0f), true);
 	}
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 	{
-		Racket_Right->body->ApplyForceToCenter(b2Vec2(0.0f, -25.0f), true);
-		Racket_Rightop->body->ApplyForceToCenter(b2Vec2(0.0f, -25.0f), true);
+		Racket_Right->body->ApplyForceToCenter(b2Vec2(0.0f, -55.0f), true);
+		Racket_Rightop->body->ApplyForceToCenter(b2Vec2(0.0f, -55.0f), true);
 		App->audio->PlayFx(kickerleft_fx);
 	}
 	else
@@ -179,15 +183,7 @@ update_status ModuleSceneIntro::Update()
 
 	//circles
 	
-	c = circles.getFirst();
-	while(c != NULL)
-	{
-		int x, y;
-		c->data->GetPosition(x, y);
-		
-			App->renderer->Blit(circle, x, y, NULL, 1.0f,0);
-		c = c->next;
-	}
+	
 
 
 	//boxes
@@ -303,6 +299,56 @@ update_status ModuleSceneIntro::Update()
 	}
 	if (score > highscore) {
 		highscore = score;
+	}
+	if (hitS == false) {
+		App->renderer->Blit(hitS_Tex, 12,295, NULL, 1.0f, 0);
+	}
+	else {
+		App->renderer->Blit(pointS_Tex, 22, 304, NULL, 1.0f, 0);
+		App->renderer->Blit(pointS_Tex, 46, 163, NULL, 1.0f, 0);
+	}
+
+	if (hitU == false) {
+		App->renderer->Blit(hitU_Tex, 55, 106, NULL, 1.0f, 0);
+	}
+	else {
+
+		App->renderer->Blit(pointU_Tex, 61, 118, NULL, 1.0f, 0);
+		App->renderer->Blit(pointU_Tex, 54, 181, NULL, 1.0f, 0);
+	}
+	if (hitP == false) {
+		App->renderer->Blit(hitP_Tex,79, 95, NULL, 1.0f, 0);
+	}
+	else {
+		App->renderer->Blit(pointP_Tex, 84, 108, NULL, 1.0f, 0);
+		App->renderer->Blit(pointP_Tex, 63, 200, NULL, 1.0f, 0);
+	}
+	if (hitE == false) {
+		App->renderer->Blit(hitE_Tex, 272, 282, NULL, 1.0f, 0);
+	}
+	
+	else {
+		App->renderer->Blit(pointE_Tex, 268, 292, NULL, 1.0f, 0);
+		App->renderer->Blit(pointE_Tex, 72, 221, NULL, 1.0f, 0);
+	}
+		if (hitR == false) {
+			App->renderer->Blit(hitR_Tex, 292, 298, NULL, 1.0f, 0);
+		}
+		else {
+			App->renderer->Blit(pointR_Tex, 286, 308, NULL, 1.0f, 0);
+			App->renderer->Blit(pointR_Tex, 80, 240, NULL, 1.0f, 0);
+		}
+
+
+
+c = circles.getFirst();
+	while(c != NULL)
+	{
+		int x, y;
+		c->data->GetPosition(x, y);
+		
+			App->renderer->Blit(circle, x, y, NULL, 1.0f,0);
+		c = c->next;
 	}
 
 	return UPDATE_CONTINUE;
@@ -651,8 +697,8 @@ void ModuleSceneIntro::StartTextures()
 {
 	sprites = App->textures->Load("pinball/backgroundall.png");
 	Centercircle.PushBack({ 27,154,112,111 });
-	Centercircle.PushBack({ 144,156,112,105 });
-	Centercircle.PushBack({ 250,158,112,111 });
+	Centercircle.PushBack({ 144,156,112,102 });
+	Centercircle.PushBack({ 250,158,112,102 });
 	Centercircle.PushBack({ 359,154,114,111 });
 	Centercircle.PushBack({600,154,114,111 });
 	Centercircle.speed = 0.01f;
@@ -707,7 +753,16 @@ void ModuleSceneIntro::StartTextures()
 	background = App->textures->Load("pinball/background.png");
 	Screen = App->textures->Load("pinball/Screen.png");
 	grid = App->textures->Load("pinball/grid.png");
-	
+	hitS_Tex = App->textures->Load("pinball/Letters/hitS.png");
+	hitU_Tex = App->textures->Load("pinball/Letters/hitUR.png");
+	hitP_Tex = App->textures->Load("pinball/Letters/hitUR.png");
+	hitE_Tex = App->textures->Load("pinball/Letters/hitEP.png");
+	hitR_Tex = App->textures->Load("pinball/Letters/hitEP.png");
+	pointS_Tex = App->textures->Load("pinball/Letters/S.png");
+	pointU_Tex = App->textures->Load("pinball/Letters/U.png");
+	pointP_Tex = App->textures->Load("pinball/Letters/P.png");
+	pointE_Tex = App->textures->Load("pinball/Letters/E.png");
+	pointR_Tex = App->textures->Load("pinball/Letters/R.png");
 	
 	Bumper_Tex = App->textures->Load("pinball/button.png");
 	twohundred_Tex = App->textures->Load("pinball/Letters/200Active.png");

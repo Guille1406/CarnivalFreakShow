@@ -48,7 +48,11 @@ public:
 	bool twoHun3;
 	bool twoHun4;
 	bool fiveXbool;
-
+	bool hitS;
+	bool hitU;
+	bool hitP;
+	bool hitE;
+	bool hitR;
 	SDL_Texture* twohundred_Tex;
 	SDL_Texture* sprites;
 	SDL_Texture* circle;
@@ -62,6 +66,16 @@ public:
 	SDL_Texture* RacketRTex;
 	SDL_Texture* Bumper_Tex;
 	SDL_Texture* fivex_Tex;
+	SDL_Texture* hitS_Tex;
+	SDL_Texture* pointS_Tex; 
+	SDL_Texture* hitU_Tex;
+	SDL_Texture* pointU_Tex;
+	SDL_Texture* hitP_Tex;
+	SDL_Texture* pointP_Tex;
+	SDL_Texture* hitE_Tex;
+	SDL_Texture* pointE_Tex;
+	SDL_Texture* hitR_Tex;
+	SDL_Texture* pointR_Tex;
 	//
 	Animation hitbandR_Tex;
 	Animation hitbandL_Tex;

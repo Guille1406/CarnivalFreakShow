@@ -163,7 +163,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius,b2BodyType type ,
 	fixture.shape = &shape;
 	fixture.density = 1.0f;
 	fixture.filter.categoryBits =typeC;
-	fixture.filter.maskBits = WALLS | KICKER  | BALLOUT | SENSOR | RAIL_SENSOR_UP | LETTER_SENSOR | BALL;
+	fixture.filter.maskBits = WALLS | KICKER  | BALLOUT | SENSOR | RAIL_SENSOR_UP | LETTER_SENSOR | BALL | SENSOR_S | SENSOR_U | SENSOR_P | SENSOR_E | SENSOR_R;
 	if (Rest != NULL) {
 		fixture.restitution = Rest;
 	}
@@ -254,7 +254,7 @@ PhysBody* ModulePhysics::CreateRacket(int x, int y, int width, int height, bool 
 	b2FixtureDef fixture;
 	fixture.shape = &racket;
 	fixture.density = 1.0f;
-	fixture.restitution = 0.2f;
+
 	fixture.filter.categoryBits = typeC;
 	fixture.filter.maskBits = BALL;
 	b->CreateFixture(&fixture);
@@ -268,10 +268,11 @@ PhysBody* ModulePhysics::CreateRacket(int x, int y, int width, int height, bool 
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int height, collision typeC)
+PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int height, collision typeC, int angle)
 {
 	b2BodyDef body;
 	body.type = b2_staticBody;
+	body.angle = angle * DEGTORAD;
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 
 	b2Body* b = world->CreateBody(&body);
@@ -568,6 +569,7 @@ void ModulePhysics::RailDetect(PhysBody* bodyA, PhysBody* bodyB)
 			App->scene_intro->lives--;
 			App->scene_intro->multiplier = 1;
 			App->scene_intro->spawner = true;
+			App->scene_intro->hitS = App->scene_intro->hitU = App->scene_intro->hitP = App->scene_intro->hitE = App->scene_intro->hitR = false;
 		}
 		else {
 			App->window->SetTitle("//**GAME OVER**\\");
@@ -577,5 +579,24 @@ void ModulePhysics::RailDetect(PhysBody* bodyA, PhysBody* bodyB)
 			App->scene_intro->spawner = true;
 		}
 	}
+	if (bodyB->body->GetFixtureList()->GetFilterData().categoryBits == SENSOR_S) {
 
+		App->scene_intro->hitS = true;
+	}
+	if (bodyB->body->GetFixtureList()->GetFilterData().categoryBits == SENSOR_U) {
+
+		App->scene_intro->hitU = true;
+	}
+	if (bodyB->body->GetFixtureList()->GetFilterData().categoryBits == SENSOR_P) {
+
+		App->scene_intro->hitP = true;
+	}
+	if (bodyB->body->GetFixtureList()->GetFilterData().categoryBits == SENSOR_E) {
+
+		App->scene_intro->hitE = true;
+	}
+	if (bodyB->body->GetFixtureList()->GetFilterData().categoryBits == SENSOR_R) {
+
+		App->scene_intro->hitR = true;
+	}
 }
